@@ -1,0 +1,456 @@
+openapi: 3.0.0
+info:
+  title: Event-Plus API
+  description: This is an events-plus server
+  contact:
+    name: Carlos sibalatani
+    email: sibalatanics@outlook.com
+  version: 3.1.0
+servers:
+  - url: http://localhost:8080
+    variables:
+      host:
+        default: localhost
+      protocol:
+        default: http
+        enum:
+          - http
+          - https
+      port:
+        default: '8080'
+  - url: http://api.eventsplus.com/v1
+paths:
+  /event:
+    get:
+      tags:
+        - Event
+      description: get all events
+      operationId: getEvents
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: No events found
+    post:
+      tags:
+        - Event
+      description: add new event
+      operationId: addEvent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '405':
+          description: Invalid input
+  /event/{eventId}:
+    delete:
+      tags:
+        - Event
+      description: Delete event based on path parameter
+      operationId: deleteEventById
+      parameters:
+        - $ref: '#/components/parameters/PathEventId'
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Event not found
+      security:
+        - jwtToken: []
+    get:
+      tags:
+        - Event
+      description: Returns a single event by id
+      operationId: getEventById
+      parameters:
+        - $ref: '#/components/parameters/PathEventId'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Event not found
+      security:
+        - jwtToken: []
+  /user:
+    delete:
+      tags:
+        - User
+      summary: Delete user
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      parameters:
+        - $ref: '#/components/parameters/PathUserName'
+      responses:
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+      security:
+        - jwtToken: []
+    get:
+      tags:
+        - user
+      summary: Get all  user
+      description: get all users from the server.
+      operationId: getUsers
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: No users found
+      security:
+        - jwtToken: []
+    post:
+      tags:
+        - user
+      summary: Create user
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '405':
+          description: Invalid input
+      security:
+        - jwtToken: []
+    put:
+      tags:
+        - User
+      summary: Updated user
+      description: This can only be done by the logged in user.
+      operationId: updateUser
+      parameters:
+        - name: userName
+          in: path
+          required: true
+          schema:
+            type: string
+            example: Herobiam
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User successfully returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid user supplied
+        '404':
+          description: User not found
+      security:
+        - jwtToken: []
+  /user/login:
+    get:
+      tags:
+        - login
+      summary: login/sign in user
+      description: get the api token
+      operationId: login
+      parameters:
+        - $ref: '#/components/parameters/QueryUsername'
+        - in: query
+          name: password
+          required: true
+          schema:
+            type: string
+            example: stack@123
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid username/password supplied
+      security:
+        - jwtToken: []
+  /user/logout:
+    get:
+      tags:
+        - user
+      summary: Logs out current logged in user session
+      description: delete the api token
+      operationId: logoutUser
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+      security:
+        - jwtToken: []
+  /user/{userName}:
+    get:
+      tags:
+        - User
+      description: Get user by name
+      operationId: getUserByName
+      parameters:
+        - $ref: '#/components/parameters/PathUserName'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+      security:
+        - jwtToken: []
+components:
+  parameters:
+    PathEventId:
+      in: path
+      name: eventId
+      required: true
+      schema:
+        type: string
+    PathUserName:
+      name: userName
+      in: path
+      required: true
+      schema:
+        type: string
+        example: Herobiam
+    QueryPassword:
+      in: query
+      name: password
+      required: true
+      schema:
+        type: string
+        example: stack@123
+    QueryUsername:
+      in: query
+      name: username
+      required: true
+      schema:
+        type: string
+        example: Herobiam/hherobiam@gmail.com
+  schemas:
+    EventCategory:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        name:
+          type: string
+      example:
+        _id: 5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f
+        name: Concert
+    EventHost:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phoneNumber:
+          type: string
+      example:
+        _id: 5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f
+        name: Seattle Coffee
+        email: host@gmail.com
+        phone_no: '123456789'
+    EventLocation:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+        longitude:
+          type: string
+        latitude:
+          type: string
+      example:
+        _id: 5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f
+        name: Seattle Coffee
+        address: '123456789'
+        city: Seattle
+        state: WA
+        zip: '98000'
+        country: USA
+        longitude: '-122.3320708'
+        latitude: '47.6062095'
+    EventTickets:
+      type: object
+      properties:
+        _id:
+          type: integer
+          format: uuid
+        type:
+          type: string
+          enum:
+            - VIP
+            - General
+        price:
+          type: number
+        quantity:
+          type: integer
+      example:
+        _id: 5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f
+        type: General Admission
+        price: 150
+        quantity: 100
+    Event:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          description: Events name
+        description:
+          type: string
+          description: Events description
+        host:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventHost'
+        category:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventCategory'
+        eventDate:
+          type: string
+          format: date
+        endTime:
+          type: string
+        location:
+          $ref: '#/components/schemas/EventLocation'
+        attendance:
+          type: integer
+          format: int32
+        tickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventTickets'
+        images:
+          type: array
+          items:
+            type: string
+            format: uri
+      example:
+        _id: 6e210bfd-4673-493d-aa23-68305a718710
+        name: Coffee concert
+        description: Coffee concert
+        host:
+          - _id: 5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f
+            name: Seattle Coffee
+            email: host@gmail.com
+            phone_no: '123456789'
+        category:
+          - _id: 5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f
+            name: Concert
+          - _id: 5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f
+            name: Coffee meetup
+        event_datetime: '2020-01-01T00:00:00.000Z'
+        end_time: '2020-01-01T00:00:00.000Z'
+        location:
+          _id: 5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f
+          name: Seattle Coffee
+          address: '123456789'
+          city: Seattle
+          state: WA
+          zip: '98000'
+          country: USA
+          longitude: '-122.3320708'
+          latitude: '47.6062095'
+        attendance: 150
+        tickets:
+          - _id: 5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f
+            type: General Admission
+            price: '150.00'
+            quantity: 100
+          - _id: 5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f
+            type: VIP
+            price: '200.00'
+            quantity: 50
+        images:
+          - url: >-
+              https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        first_name:
+          type: string
+          description: Users firstname
+        last_name:
+          type: string
+          description: Users lastname
+        email:
+          type: string
+          format: email
+          description: Users email
+        date_of_birth:
+          type: string
+          format: date
+          description: Users date of birth
+        password:
+          type: string
+          format: password
+        auth_token:
+          type: string
+        favorites:
+          $ref: '#/components/schemas/Event'
+      example:
+        _id: 6e210bfd-4673-493d-aa23-68305a718710
+        first_name: Kathryn
+        last_name: Bennett
+        date_of_birth: '1962-01-01'
+        email: example@gmail.com
+        password: password
+        created_at: '2020-01-01T00:00:00.000Z'
+        updated_at: '2020-01-01T00:00:00.000Z'
+        auth_token: >-
+          adsjfdsoahdsfoiuahrnlvihbsaouybvclkhsabdcuyvcgqsoflurbgourygrwbekuiybvfkjhbkueyg
+        favorites:
+          - _id: 5e210bfd-4673-493d-aa23-68305a718710
+  securitySchemes:
+    jwtToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
