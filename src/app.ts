@@ -1,4 +1,5 @@
 import http, { Http } from '@/http';
+import { connect } from './database/connection';
 
 /**
  * Returns a promise allowing the server or cli script to know
@@ -11,5 +12,6 @@ export default async (port: number): Promise<Http> => {
 
   // Return the http layer, to inject custom middleware pass the HttpOptions
   // argument. See the @/http/index.ts
+  await connect();
   return http(port);
 };

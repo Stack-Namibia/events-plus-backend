@@ -37,4 +37,5 @@ export default {
     ),
     silent: true, // disable thread / proc start logs
   },
+  mongoUrl: ConfigHelper.required('MONGO_URL') as string,
 };
