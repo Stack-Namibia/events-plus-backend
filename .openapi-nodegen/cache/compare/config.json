@@ -7,6 +7,14 @@
       "/Users/hero/Documents/events-plus-backend/.openapi-nodegen/cache/compare/src/domains/UserDomain.ts": {
         "diff": ""
       }
+    },
+    "2022-07-03T11:36:07.839Z": {
+      "/Users/hero/Documents/events-plus-backend/.openapi-nodegen/cache/compare/src/domains/EventDomain.ts": {
+        "diff": ""
+      },
+      "/Users/hero/Documents/events-plus-backend/.openapi-nodegen/cache/compare/src/domains/UserDomain.ts": {
+        "diff": ""
+      }
     }
   }
 }

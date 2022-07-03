@@ -7,11 +7,12 @@ export { EventEventIdDeletePath } from './EventEventIdDeletePath';
 export { EventEventIdGetPath } from './EventEventIdGetPath';
 export { EventHost } from './EventHost';
 export { EventLocation } from './EventLocation';
+export { EventResponse } from './EventResponse';
 export { EventTickets } from './EventTickets';
+export { Meta } from './Meta';
 export { UpdateUserPut } from './UpdateUserPut';
 export { User } from './User';
 export { UserDeletePath } from './UserDeletePath';
 export { UserLoginGetQuery } from './UserLoginGetQuery';
 export { UserUserNameGetPath } from './UserUserNameGetPath';
 export { JwtAccess } from './JwtAccess';
-

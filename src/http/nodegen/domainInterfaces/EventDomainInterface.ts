@@ -3,6 +3,7 @@ import {
   Event,
   EventEventIdDeletePath,
   EventEventIdGetPath,
+  EventResponse,
 } from '@/http/nodegen/interfaces';
 import { JwtAccess } from '@/http/nodegen/interfaces';
 
@@ -13,7 +14,7 @@ export interface EventDomainInterface {
    * Description: get all events
    * No additional middleware used
    **/
-  getEvents(): Promise<Event>;
+  getEvents(): Promise<EventResponse>;
 
   /**
    * Operation ID: addEvent

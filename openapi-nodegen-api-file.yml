@@ -32,7 +32,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Event'
+                $ref: '#/components/schemas/EventResponse'
         '400':
           description: No events found
     post:
@@ -311,6 +311,17 @@ components:
         country: USA
         longitude: '-122.3320708'
         latitude: '47.6062095'
+    EventResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        meta:
+          $ref: '#/components/schemas/Meta'
     EventTickets:
       type: object
       properties:
@@ -409,6 +420,21 @@ components:
         images:
           - url: >-
               https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60
+    Meta:
+      type: object
+      properties:
+        total:
+          type: number
+        lastUpdate:
+          type: string
+          format: date-time
+        skip:
+          type: number
+        limit:
+          type: number
+        orderedBy:
+          type: string
+      additionalProperties: true
     User:
       type: object
       properties:

@@ -47,20 +47,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": [
+                    "data"
+                  ],
                   "properties": {
-                    "_id": {
-                      "type": "string",
-                      "format": "uuid"
-                    },
-                    "name": {
-                      "type": "string",
-                      "description": "Events name"
-                    },
-                    "description": {
-                      "type": "string",
-                      "description": "Events description"
-                    },
-                    "host": {
+                    "data": {
                       "type": "array",
                       "items": {
                         "type": "object",
@@ -70,192 +61,234 @@
                             "format": "uuid"
                           },
                           "name": {
-                            "type": "string"
-                          },
-                          "email": {
                             "type": "string",
-                            "format": "email"
+                            "description": "Events name"
                           },
-                          "phoneNumber": {
+                          "description": {
+                            "type": "string",
+                            "description": "Events description"
+                          },
+                          "host": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "_id": {
+                                  "type": "string",
+                                  "format": "uuid"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "email": {
+                                  "type": "string",
+                                  "format": "email"
+                                },
+                                "phoneNumber": {
+                                  "type": "string"
+                                }
+                              },
+                              "example": {
+                                "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                                "name": "Seattle Coffee",
+                                "email": "host@gmail.com",
+                                "phone_no": "123456789"
+                              }
+                            }
+                          },
+                          "category": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "_id": {
+                                  "type": "string",
+                                  "format": "uuid"
+                                },
+                                "name": {
+                                  "type": "string"
+                                }
+                              },
+                              "example": {
+                                "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                                "name": "Concert"
+                              }
+                            }
+                          },
+                          "eventDate": {
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "endTime": {
                             "type": "string"
+                          },
+                          "location": {
+                            "type": "object",
+                            "properties": {
+                              "_id": {
+                                "type": "string",
+                                "format": "uuid"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "address": {
+                                "type": "string"
+                              },
+                              "city": {
+                                "type": "string"
+                              },
+                              "state": {
+                                "type": "string"
+                              },
+                              "zip": {
+                                "type": "string"
+                              },
+                              "country": {
+                                "type": "string"
+                              },
+                              "longitude": {
+                                "type": "string"
+                              },
+                              "latitude": {
+                                "type": "string"
+                              }
+                            },
+                            "example": {
+                              "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                              "name": "Seattle Coffee",
+                              "address": "123456789",
+                              "city": "Seattle",
+                              "state": "WA",
+                              "zip": "98000",
+                              "country": "USA",
+                              "longitude": "-122.3320708",
+                              "latitude": "47.6062095"
+                            }
+                          },
+                          "attendance": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "tickets": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "_id": {
+                                  "type": "integer",
+                                  "format": "uuid"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "VIP",
+                                    "General"
+                                  ]
+                                },
+                                "price": {
+                                  "type": "number"
+                                },
+                                "quantity": {
+                                  "type": "integer"
+                                }
+                              },
+                              "example": {
+                                "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                                "type": "General Admission",
+                                "price": 150,
+                                "quantity": 100
+                              }
+                            }
+                          },
+                          "images": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "format": "uri"
+                            }
                           }
                         },
                         "example": {
-                          "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
-                          "name": "Seattle Coffee",
-                          "email": "host@gmail.com",
-                          "phone_no": "123456789"
-                        }
-                      }
-                    },
-                    "category": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "_id": {
-                            "type": "string",
-                            "format": "uuid"
+                          "_id": "6e210bfd-4673-493d-aa23-68305a718710",
+                          "name": "Coffee concert",
+                          "description": "Coffee concert",
+                          "host": [
+                            {
+                              "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                              "name": "Seattle Coffee",
+                              "email": "host@gmail.com",
+                              "phone_no": "123456789"
+                            }
+                          ],
+                          "category": [
+                            {
+                              "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                              "name": "Concert"
+                            },
+                            {
+                              "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                              "name": "Coffee meetup"
+                            }
+                          ],
+                          "event_datetime": "2020-01-01T00:00:00.000Z",
+                          "end_time": "2020-01-01T00:00:00.000Z",
+                          "location": {
+                            "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                            "name": "Seattle Coffee",
+                            "address": "123456789",
+                            "city": "Seattle",
+                            "state": "WA",
+                            "zip": "98000",
+                            "country": "USA",
+                            "longitude": "-122.3320708",
+                            "latitude": "47.6062095"
                           },
-                          "name": {
-                            "type": "string"
-                          }
-                        },
-                        "example": {
-                          "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
-                          "name": "Concert"
+                          "attendance": 150,
+                          "tickets": [
+                            {
+                              "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                              "type": "General Admission",
+                              "price": "150.00",
+                              "quantity": 100
+                            },
+                            {
+                              "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                              "type": "VIP",
+                              "price": "200.00",
+                              "quantity": 50
+                            }
+                          ],
+                          "images": [
+                            {
+                              "url": "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+                            }
+                          ]
                         }
                       }
                     },
-                    "eventDate": {
-                      "type": "string",
-                      "format": "date"
-                    },
-                    "endTime": {
-                      "type": "string"
-                    },
-                    "location": {
+                    "meta": {
                       "type": "object",
                       "properties": {
-                        "_id": {
+                        "total": {
+                          "type": "number"
+                        },
+                        "lastUpdate": {
                           "type": "string",
-                          "format": "uuid"
+                          "format": "date-time"
                         },
-                        "name": {
-                          "type": "string"
+                        "skip": {
+                          "type": "number"
                         },
-                        "address": {
-                          "type": "string"
+                        "limit": {
+                          "type": "number"
                         },
-                        "city": {
-                          "type": "string"
-                        },
-                        "state": {
-                          "type": "string"
-                        },
-                        "zip": {
-                          "type": "string"
-                        },
-                        "country": {
-                          "type": "string"
-                        },
-                        "longitude": {
-                          "type": "string"
-                        },
-                        "latitude": {
+                        "orderedBy": {
                           "type": "string"
                         }
                       },
-                      "example": {
-                        "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
-                        "name": "Seattle Coffee",
-                        "address": "123456789",
-                        "city": "Seattle",
-                        "state": "WA",
-                        "zip": "98000",
-                        "country": "USA",
-                        "longitude": "-122.3320708",
-                        "latitude": "47.6062095"
-                      }
-                    },
-                    "attendance": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "tickets": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "_id": {
-                            "type": "integer",
-                            "format": "uuid"
-                          },
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "VIP",
-                              "General"
-                            ]
-                          },
-                          "price": {
-                            "type": "number"
-                          },
-                          "quantity": {
-                            "type": "integer"
-                          }
-                        },
-                        "example": {
-                          "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
-                          "type": "General Admission",
-                          "price": 150,
-                          "quantity": 100
-                        }
-                      }
-                    },
-                    "images": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "format": "uri"
-                      }
+                      "additionalProperties": true
                     }
-                  },
-                  "example": {
-                    "_id": "6e210bfd-4673-493d-aa23-68305a718710",
-                    "name": "Coffee concert",
-                    "description": "Coffee concert",
-                    "host": [
-                      {
-                        "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
-                        "name": "Seattle Coffee",
-                        "email": "host@gmail.com",
-                        "phone_no": "123456789"
-                      }
-                    ],
-                    "category": [
-                      {
-                        "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
-                        "name": "Concert"
-                      },
-                      {
-                        "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
-                        "name": "Coffee meetup"
-                      }
-                    ],
-                    "event_datetime": "2020-01-01T00:00:00.000Z",
-                    "end_time": "2020-01-01T00:00:00.000Z",
-                    "location": {
-                      "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
-                      "name": "Seattle Coffee",
-                      "address": "123456789",
-                      "city": "Seattle",
-                      "state": "WA",
-                      "zip": "98000",
-                      "country": "USA",
-                      "longitude": "-122.3320708",
-                      "latitude": "47.6062095"
-                    },
-                    "attendance": 150,
-                    "tickets": [
-                      {
-                        "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
-                        "type": "General Admission",
-                        "price": "150.00",
-                        "quantity": 100
-                      },
-                      {
-                        "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
-                        "type": "VIP",
-                        "price": "200.00",
-                        "quantity": 50
-                      }
-                    ],
-                    "images": [
-                      {
-                        "url": "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-                      }
-                    ]
                   }
                 }
               }
@@ -267,7 +300,7 @@
         },
         "x-request-definitions": {},
         "x-response-definitions": {
-          "200": "Event"
+          "200": "EventResponse"
         }
       },
       "post": {
@@ -3342,6 +3375,252 @@
           "latitude": "47.6062095"
         }
       },
+      "EventResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Events name"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Events description"
+                },
+                "host": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string",
+                        "format": "email"
+                      },
+                      "phoneNumber": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                      "name": "Seattle Coffee",
+                      "email": "host@gmail.com",
+                      "phone_no": "123456789"
+                    }
+                  }
+                },
+                "category": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                      "name": "Concert"
+                    }
+                  }
+                },
+                "eventDate": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "endTime": {
+                  "type": "string"
+                },
+                "location": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "address": {
+                      "type": "string"
+                    },
+                    "city": {
+                      "type": "string"
+                    },
+                    "state": {
+                      "type": "string"
+                    },
+                    "zip": {
+                      "type": "string"
+                    },
+                    "country": {
+                      "type": "string"
+                    },
+                    "longitude": {
+                      "type": "string"
+                    },
+                    "latitude": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                    "name": "Seattle Coffee",
+                    "address": "123456789",
+                    "city": "Seattle",
+                    "state": "WA",
+                    "zip": "98000",
+                    "country": "USA",
+                    "longitude": "-122.3320708",
+                    "latitude": "47.6062095"
+                  }
+                },
+                "attendance": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "tickets": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "integer",
+                        "format": "uuid"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "VIP",
+                          "General"
+                        ]
+                      },
+                      "price": {
+                        "type": "number"
+                      },
+                      "quantity": {
+                        "type": "integer"
+                      }
+                    },
+                    "example": {
+                      "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                      "type": "General Admission",
+                      "price": 150,
+                      "quantity": 100
+                    }
+                  }
+                },
+                "images": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uri"
+                  }
+                }
+              },
+              "example": {
+                "_id": "6e210bfd-4673-493d-aa23-68305a718710",
+                "name": "Coffee concert",
+                "description": "Coffee concert",
+                "host": [
+                  {
+                    "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                    "name": "Seattle Coffee",
+                    "email": "host@gmail.com",
+                    "phone_no": "123456789"
+                  }
+                ],
+                "category": [
+                  {
+                    "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                    "name": "Concert"
+                  },
+                  {
+                    "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                    "name": "Coffee meetup"
+                  }
+                ],
+                "event_datetime": "2020-01-01T00:00:00.000Z",
+                "end_time": "2020-01-01T00:00:00.000Z",
+                "location": {
+                  "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                  "name": "Seattle Coffee",
+                  "address": "123456789",
+                  "city": "Seattle",
+                  "state": "WA",
+                  "zip": "98000",
+                  "country": "USA",
+                  "longitude": "-122.3320708",
+                  "latitude": "47.6062095"
+                },
+                "attendance": 150,
+                "tickets": [
+                  {
+                    "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                    "type": "General Admission",
+                    "price": "150.00",
+                    "quantity": 100
+                  },
+                  {
+                    "_id": "5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f",
+                    "type": "VIP",
+                    "price": "200.00",
+                    "quantity": 50
+                  }
+                ],
+                "images": [
+                  {
+                    "url": "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+                  }
+                ]
+              }
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "type": "number"
+              },
+              "lastUpdate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "skip": {
+                "type": "number"
+              },
+              "limit": {
+                "type": "number"
+              },
+              "orderedBy": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
       "EventTickets": {
         "type": "object",
         "properties": {
@@ -3582,6 +3861,28 @@
             }
           ]
         }
+      },
+      "Meta": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number"
+          },
+          "lastUpdate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "skip": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "orderedBy": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
       },
       "User": {
         "type": "object",
@@ -3905,9 +4206,21 @@
       }
     },
     {
+      "name": "EventResponse",
+      "content": {
+        "outputString": "\nexport interface EventResponse {\n    data:  Datum[];\n    meta?: Meta;\n}\n\nexport interface Datum {\n    _id?:        string;\n    attendance?: number;\n    category?:   Category[];\n    /**\n     * Events description\n     */\n    description?: string;\n    endTime?:     string;\n    eventDate?:   Date;\n    host?:        Host[];\n    images?:      string[];\n    location?:    Location;\n    /**\n     * Events name\n     */\n    name?:    string;\n    tickets?: Ticket[];\n}\n\nexport interface Category {\n    _id?:  string;\n    name?: string;\n}\n\nexport interface Host {\n    _id?:         string;\n    email?:       string;\n    name?:        string;\n    phoneNumber?: string;\n}\n\nexport interface Location {\n    _id?:       string;\n    address?:   string;\n    city?:      string;\n    country?:   string;\n    latitude?:  string;\n    longitude?: string;\n    name?:      string;\n    state?:     string;\n    zip?:       string;\n}\n\nexport interface Ticket {\n    _id?:      number;\n    price?:    number;\n    quantity?: number;\n    type?:     Type;\n}\n\nexport enum Type {\n    General = \"General\",\n    Vip = \"VIP\",\n}\n\nexport interface Meta {\n    lastUpdate?: Date;\n    limit?:      number;\n    orderedBy?:  string;\n    skip?:       number;\n    total?:      number;\n}\n\n"
+      }
+    },
+    {
       "name": "EventTickets",
       "content": {
         "outputString": "\nexport interface EventTickets {\n    _id?:      number;\n    price?:    number;\n    quantity?: number;\n    type?:     Type;\n}\n\nexport enum Type {\n    General = \"General\",\n    Vip = \"VIP\",\n}\n\n"
+      }
+    },
+    {
+      "name": "Meta",
+      "content": {
+        "outputString": "\nexport interface Meta {\n    lastUpdate?: Date;\n    limit?:      number;\n    orderedBy?:  string;\n    skip?:       number;\n    total?:      number;\n}\n\n"
       }
     },
     {

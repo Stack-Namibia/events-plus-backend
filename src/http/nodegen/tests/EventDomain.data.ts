@@ -41,86 +41,108 @@ export const addEventBodyAddEventPost = {
   ],
 };
 
-export const pathEventId = '4wZ7wHxsFLp2YbtLdetHk0jmykGHwt0ULbnodjAT3';
+export const pathEventId = '7Txrk8OBTXaTbVHOgNSKL7';
 
 export const validationSchemas: Record<string, Joi.AnySchema> = {
   eventGet200: Joi.object({
-    _id: Joi.string().allow('').allow(null),
-    name: Joi.string().allow('').allow(null),
-    description: Joi.string().allow('').allow(null),
-    host: Joi.array().items(
+    data: Joi.array().items(
       Joi.object({
         _id: Joi.string().allow('').allow(null),
         name: Joi.string().allow('').allow(null),
-        email: Joi.string().allow('').allow(null),
-        phoneNumber: Joi.string().allow('').allow(null),
+        description: Joi.string().allow('').allow(null),
+        host: Joi.array().items(
+          Joi.object({
+            _id: Joi.string().allow('').allow(null),
+            name: Joi.string().allow('').allow(null),
+            email: Joi.string().allow('').allow(null),
+            phoneNumber: Joi.string().allow('').allow(null),
+          }).allow(null)
+        ),
+        category: Joi.array().items(
+          Joi.object({ _id: Joi.string().allow('').allow(null), name: Joi.string().allow('').allow(null) }).allow(null)
+        ),
+        eventDate: Joi.string().allow('').allow(null),
+        endTime: Joi.string().allow('').allow(null),
+        location: Joi.object({
+          _id: Joi.string().allow('').allow(null),
+          name: Joi.string().allow('').allow(null),
+          address: Joi.string().allow('').allow(null),
+          city: Joi.string().allow('').allow(null),
+          state: Joi.string().allow('').allow(null),
+          zip: Joi.string().allow('').allow(null),
+          country: Joi.string().allow('').allow(null),
+          longitude: Joi.string().allow('').allow(null),
+          latitude: Joi.string().allow('').allow(null),
+        }).allow(null),
+        attendance: Joi.number().integer().allow(null),
+        tickets: Joi.array().items(
+          Joi.object({
+            _id: Joi.number().integer().allow(null),
+            type: Joi.string().allow('').valid('VIP', 'General').allow(null),
+            price: Joi.number().allow(null),
+            quantity: Joi.number().integer().allow(null),
+          }).allow(null)
+        ),
+        images: Joi.array().items(Joi.string().allow('').allow(null)),
       }).allow(null)
     ),
-    category: Joi.array().items(
-      Joi.object({ _id: Joi.string().allow('').allow(null), name: Joi.string().allow('').allow(null) }).allow(null)
-    ),
-    eventDate: Joi.string().allow('').allow(null),
-    endTime: Joi.string().allow('').allow(null),
-    location: Joi.object({
-      _id: Joi.string().allow('').allow(null),
-      name: Joi.string().allow('').allow(null),
-      address: Joi.string().allow('').allow(null),
-      city: Joi.string().allow('').allow(null),
-      state: Joi.string().allow('').allow(null),
-      zip: Joi.string().allow('').allow(null),
-      country: Joi.string().allow('').allow(null),
-      longitude: Joi.string().allow('').allow(null),
-      latitude: Joi.string().allow('').allow(null),
+    meta: Joi.object({
+      total: Joi.number().allow(null),
+      lastUpdate: Joi.string().allow('').allow(null),
+      skip: Joi.number().allow(null),
+      limit: Joi.number().allow(null),
+      orderedBy: Joi.string().allow('').allow(null),
     }).allow(null),
-    attendance: Joi.number().integer().allow(null),
-    tickets: Joi.array().items(
-      Joi.object({
-        _id: Joi.number().integer().allow(null),
-        type: Joi.string().allow('').valid('VIP', 'General').allow(null),
-        price: Joi.number().allow(null),
-        quantity: Joi.number().integer().allow(null),
-      }).allow(null)
-    ),
-    images: Joi.array().items(Joi.string().allow('').allow(null)),
   }).allow(null),
   eventGetSuccess: Joi.object({
-    _id: Joi.string().allow('').allow(null),
-    name: Joi.string().allow('').allow(null),
-    description: Joi.string().allow('').allow(null),
-    host: Joi.array().items(
+    data: Joi.array().items(
       Joi.object({
         _id: Joi.string().allow('').allow(null),
         name: Joi.string().allow('').allow(null),
-        email: Joi.string().allow('').allow(null),
-        phoneNumber: Joi.string().allow('').allow(null),
+        description: Joi.string().allow('').allow(null),
+        host: Joi.array().items(
+          Joi.object({
+            _id: Joi.string().allow('').allow(null),
+            name: Joi.string().allow('').allow(null),
+            email: Joi.string().allow('').allow(null),
+            phoneNumber: Joi.string().allow('').allow(null),
+          }).allow(null)
+        ),
+        category: Joi.array().items(
+          Joi.object({ _id: Joi.string().allow('').allow(null), name: Joi.string().allow('').allow(null) }).allow(null)
+        ),
+        eventDate: Joi.string().allow('').allow(null),
+        endTime: Joi.string().allow('').allow(null),
+        location: Joi.object({
+          _id: Joi.string().allow('').allow(null),
+          name: Joi.string().allow('').allow(null),
+          address: Joi.string().allow('').allow(null),
+          city: Joi.string().allow('').allow(null),
+          state: Joi.string().allow('').allow(null),
+          zip: Joi.string().allow('').allow(null),
+          country: Joi.string().allow('').allow(null),
+          longitude: Joi.string().allow('').allow(null),
+          latitude: Joi.string().allow('').allow(null),
+        }).allow(null),
+        attendance: Joi.number().integer().allow(null),
+        tickets: Joi.array().items(
+          Joi.object({
+            _id: Joi.number().integer().allow(null),
+            type: Joi.string().allow('').valid('VIP', 'General').allow(null),
+            price: Joi.number().allow(null),
+            quantity: Joi.number().integer().allow(null),
+          }).allow(null)
+        ),
+        images: Joi.array().items(Joi.string().allow('').allow(null)),
       }).allow(null)
     ),
-    category: Joi.array().items(
-      Joi.object({ _id: Joi.string().allow('').allow(null), name: Joi.string().allow('').allow(null) }).allow(null)
-    ),
-    eventDate: Joi.string().allow('').allow(null),
-    endTime: Joi.string().allow('').allow(null),
-    location: Joi.object({
-      _id: Joi.string().allow('').allow(null),
-      name: Joi.string().allow('').allow(null),
-      address: Joi.string().allow('').allow(null),
-      city: Joi.string().allow('').allow(null),
-      state: Joi.string().allow('').allow(null),
-      zip: Joi.string().allow('').allow(null),
-      country: Joi.string().allow('').allow(null),
-      longitude: Joi.string().allow('').allow(null),
-      latitude: Joi.string().allow('').allow(null),
+    meta: Joi.object({
+      total: Joi.number().allow(null),
+      lastUpdate: Joi.string().allow('').allow(null),
+      skip: Joi.number().allow(null),
+      limit: Joi.number().allow(null),
+      orderedBy: Joi.string().allow('').allow(null),
     }).allow(null),
-    attendance: Joi.number().integer().allow(null),
-    tickets: Joi.array().items(
-      Joi.object({
-        _id: Joi.number().integer().allow(null),
-        type: Joi.string().allow('').valid('VIP', 'General').allow(null),
-        price: Joi.number().allow(null),
-        quantity: Joi.number().integer().allow(null),
-      }).allow(null)
-    ),
-    images: Joi.array().items(Joi.string().allow('').allow(null)),
   }).allow(null),
   eventGet400: Joi.object({}),
   eventPost405: Joi.object({}),
