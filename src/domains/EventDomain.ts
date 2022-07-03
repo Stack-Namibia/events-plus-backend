@@ -1,14 +1,11 @@
-import {
-  AddEventPost,
-  Event,
-  EventEventIdDeletePath,
-  EventEventIdGetPath,
-} from '@/http/nodegen/interfaces';
+import { AddEventPost, Event, EventEventIdDeletePath, EventEventIdGetPath } from '@/http/nodegen/interfaces';
 
 import { EventDomainInterface } from '@/http/nodegen/domainInterfaces/EventDomainInterface';
 import { JwtAccess } from '@/http/nodegen/interfaces';
 
 import EventDomainMock from './__mocks__/EventDomainMock';
+import { EventModel } from '@/database/models';
+import { formatDocument } from '../shared/utils/formatter/response';
 
 class EventDomain implements EventDomainInterface {
   /**
@@ -17,8 +14,9 @@ class EventDomain implements EventDomainInterface {
    * Summary: undefined
    * Description: get all events
    **/
-  public async getEvents(): Promise<Event> {
-    return EventDomainMock.getEvents();
+  public async getEvents(): Promise<any> {
+    const events = await EventModel.find();
+    return events;
   }
 
   /**
@@ -28,7 +26,10 @@ class EventDomain implements EventDomainInterface {
    * Description: add new event
    **/
   public async addEvent(body: AddEventPost): Promise<any> {
-    return EventDomainMock.addEvent(body);
+    const event = new EventModel({ ...(body as any) });
+    await event.save();
+    return 'Event created succesfully!';
+    //return EventDomainMock.addEvent(body);
   }
 
   /**
@@ -37,10 +38,7 @@ class EventDomain implements EventDomainInterface {
    * Summary: undefined
    * Description: Delete event based on path parameter
    **/
-  public async deleteEventById(
-    jwtData: JwtAccess,
-    params: EventEventIdDeletePath
-  ): Promise<any> {
+  public async deleteEventById(jwtData: JwtAccess, params: EventEventIdDeletePath): Promise<any> {
     return EventDomainMock.deleteEventById(jwtData, params);
   }
 
@@ -50,10 +48,7 @@ class EventDomain implements EventDomainInterface {
    * Summary: undefined
    * Description: Returns a single event by id
    **/
-  public async getEventById(
-    jwtData: JwtAccess,
-    params: EventEventIdGetPath
-  ): Promise<Event> {
+  public async getEventById(jwtData: JwtAccess, params: EventEventIdGetPath): Promise<Event> {
     return EventDomainMock.getEventById(jwtData, params);
   }
 }
