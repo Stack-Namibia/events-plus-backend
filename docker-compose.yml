@@ -1,27 +1,6 @@
 version: "3"
 
 services:
-  event-plus-api:
-    image: "${IMAGE_PREFIX}event-plus-api-image:${IMAGE_TAG:-latest}"
-    build:
-      dockerfile: Dockerfile
-      context: .
-    env_file:
-      - .env
-    volumes:
-      - ./global.d.ts:/code/global.d.ts
-      - ./server.ts:/code/server.ts
-      - ./tsconfig.json:/code/tsconfig.json
-      - ./src:/code/src/
-    ports:
-      - "8080:8000"
-    depends_on:
-      - db
-    # networks:
-    #   - some-external-network
-    working_dir: /code
-    entrypoint: /bin/sh
-    command: '-c "npx tsc-watch --preserveWatchOutput --compiler /code/node_modules/.bin/ttsc --onSuccess "/sbin/docker-entrypoint.sh prod""'
   db:
     image: mongo
     command: mongod --setParameter logLevel=0
@@ -42,5 +21,26 @@ services:
     environment:
       - TARGETS=db:27017
       - TIMEOUT=60
+  event-plus-api:
+    image: "${IMAGE_PREFIX}event-plus-api-image:${IMAGE_TAG:-latest}"
+    build:
+      dockerfile: Dockerfile
+      context: .
+    env_file:
+      - .env
+    volumes:
+      - ./global.d.ts:/code/global.d.ts
+      - ./server.ts:/code/server.ts
+      - ./tsconfig.json:/code/tsconfig.json
+      - ./src:/code/src/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    links:
+      - db
+    working_dir: /code
+    entrypoint: /bin/sh
+    command: '-c "npx tsc-watch --preserveWatchOutput --compiler /code/node_modules/.bin/ttsc --onSuccess "/sbin/docker-entrypoint.sh prod""'
 volumes:
   dbdata:
