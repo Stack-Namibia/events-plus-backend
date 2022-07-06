@@ -5,12 +5,12 @@ import * as supertest from 'supertest';
 export class TestUserDomain {
   // userDelete
   //
-  public static userDeletePath(userId: UserDeletePath['userId'], root: string = baseUrl): string {
+  public static userDeletePath(id: UserDeletePath['id'], root: string = baseUrl): string {
     return `${root}/user`;
   }
 
-  public static userDelete(userId: UserDeletePath['userId'], root: string = baseUrl): supertest.Test {
-    return request.delete(this.userDeletePath(userId, root));
+  public static userDelete(id: UserDeletePath['id'], root: string = baseUrl): supertest.Test {
+    return request.delete(this.userDeletePath(id, root));
   }
 
   // userGet
@@ -25,12 +25,12 @@ export class TestUserDomain {
 
   // userPatch
   //
-  public static userPatchPath(userId: UserPatchPath['userId'], root: string = baseUrl): string {
+  public static userPatchPath(id: UserPatchPath['id'], root: string = baseUrl): string {
     return `${root}/user`;
   }
 
-  public static userPatch(userId: UserPatchPath['userId'], root: string = baseUrl): supertest.Test {
-    return request.patch(this.userPatchPath(userId, root));
+  public static userPatch(id: UserPatchPath['id'], root: string = baseUrl): supertest.Test {
+    return request.patch(this.userPatchPath(id, root));
   }
 
   // userPost
@@ -65,11 +65,11 @@ export class TestUserDomain {
 
   // userIdGet
   //
-  public static userIdGetPath(userId: UserIdGetPath['userId'], root: string = baseUrl): string {
+  public static userIdGetPath(id: UserIdGetPath['id'], root: string = baseUrl): string {
     return `${root}/user/${id}`;
   }
 
-  public static userIdGet(userId: UserIdGetPath['userId'], root: string = baseUrl): supertest.Test {
-    return request.get(this.userIdGetPath(userId, root));
+  public static userIdGet(id: UserIdGetPath['id'], root: string = baseUrl): supertest.Test {
+    return request.get(this.userIdGetPath(id, root));
   }
 }

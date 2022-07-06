@@ -19,7 +19,9 @@ class CategoryDomain implements CategoryDomainInterface {
    * Summary: undefined
    * Description: get all Categories
    **/
-  public async getCategories(jwtData: JwtAccess): Promise<EventCategoryResponse> {
+  public async getCategories(
+    jwtData: JwtAccess
+  ): Promise<EventCategoryResponse> {
     return CategoryDomainMock.getCategories(jwtData);
   }
 
@@ -29,7 +31,10 @@ class CategoryDomain implements CategoryDomainInterface {
    * Summary: undefined
    * Description: add new category
    **/
-  public async addCategory(body: AddCategoryPost, jwtData: JwtAccess): Promise<any> {
+  public async addCategory(
+    body: AddCategoryPost,
+    jwtData: JwtAccess
+  ): Promise<any> {
     return CategoryDomainMock.addCategory(body, jwtData);
   }
 
@@ -39,7 +44,10 @@ class CategoryDomain implements CategoryDomainInterface {
    * Summary: undefined
    * Description: Delete Category based on path parameter
    **/
-  public async deleteCategoryById(jwtData: JwtAccess, params: CategoryIdDeletePath): Promise<any> {
+  public async deleteCategoryById(
+    jwtData: JwtAccess,
+    params: CategoryIdDeletePath
+  ): Promise<any> {
     return CategoryDomainMock.deleteCategoryById(jwtData, params);
   }
 
@@ -49,7 +57,10 @@ class CategoryDomain implements CategoryDomainInterface {
    * Summary: undefined
    * Description: Returns a single category by id
    **/
-  public async getCategoryById(jwtData: JwtAccess, params: CategoryIdGetPath): Promise<EventCategoryResponse> {
+  public async getCategoryById(
+    jwtData: JwtAccess,
+    params: CategoryIdGetPath
+  ): Promise<EventCategoryResponse> {
     return CategoryDomainMock.getCategoryById(jwtData, params);
   }
 

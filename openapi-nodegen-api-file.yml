@@ -447,7 +447,7 @@ components:
   parameters:
     PathCategoryId:
       in: path
-      name: categoryId
+      name: id
       required: true
       schema:
         type: string
@@ -463,21 +463,21 @@ components:
         example: 6e210bfd-4673-493d-aa23-68305a718710
     PathLocationId:
       in: path
-      name: locationId
+      name: id
       required: true
       schema:
         type: string
         format: uuid
     PathTicketId:
       in: path
-      name: ticketId
+      name: id
       required: true
       schema:
         type: string
         format: uuid
         example: 6e210bfd-4673-493d-aa23-68305a718710
     PathUserId:
-      name: userId
+      name: id
       in: path
       required: true
       schema:

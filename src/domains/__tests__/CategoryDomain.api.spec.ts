@@ -1,7 +1,7 @@
 import { baseUrl, defaultSetupTeardown, mockAuth, request } from '@/http/nodegen/tests';
 import {
   addCategoryBodyAddCategoryPost,
-  pathCategoryId as categoryId,
+  pathId as id,
   responseValidator,
   updateCategoryBodyUpdateCategoryPatch,
 } from '@/http/nodegen/tests/CategoryDomain.data';

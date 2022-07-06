@@ -25,21 +25,21 @@ export class TestLocationDomain {
 
   // locationIdGet
   //
-  public static locationIdGetPath(locationId: LocationIdGetPath['locationId'], root: string = baseUrl): string {
+  public static locationIdGetPath(id: LocationIdGetPath['id'], root: string = baseUrl): string {
     return `${root}/location/${id}`;
   }
 
-  public static locationIdGet(locationId: LocationIdGetPath['locationId'], root: string = baseUrl): supertest.Test {
-    return request.get(this.locationIdGetPath(locationId, root));
+  public static locationIdGet(id: LocationIdGetPath['id'], root: string = baseUrl): supertest.Test {
+    return request.get(this.locationIdGetPath(id, root));
   }
 
   // locationIdPatch
   //
-  public static locationIdPatchPath(locationId: LocationIdPatchPath['locationId'], root: string = baseUrl): string {
+  public static locationIdPatchPath(id: LocationIdPatchPath['id'], root: string = baseUrl): string {
     return `${root}/location/${id}`;
   }
 
-  public static locationIdPatch(locationId: LocationIdPatchPath['locationId'], root: string = baseUrl): supertest.Test {
-    return request.patch(this.locationIdPatchPath(locationId, root));
+  public static locationIdPatch(id: LocationIdPatchPath['id'], root: string = baseUrl): supertest.Test {
+    return request.patch(this.locationIdPatchPath(id, root));
   }
 }

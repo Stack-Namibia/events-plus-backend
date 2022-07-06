@@ -1,9 +1,5 @@
 import { baseUrl, defaultSetupTeardown, mockAuth, request } from '@/http/nodegen/tests';
-import {
-  addTicketBodyAddTicketPost,
-  pathTicketId as ticketId,
-  responseValidator,
-} from '@/http/nodegen/tests/TicketDomain.data';
+import { addTicketBodyAddTicketPost, pathId as id, responseValidator } from '@/http/nodegen/tests/TicketDomain.data';
 
 defaultSetupTeardown();
 

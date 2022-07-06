@@ -3,9 +3,9 @@ import {
   createUserBodyCreateUserPost,
   loginQueryPassword,
   loginQueryUsername,
-  pathUserName as userName,
+  pathId as id,
   responseValidator,
-  updateUserBodyUpdateUserPut,
+  updateUserBodyUpdateUserPatch,
 } from '@/http/nodegen/tests/UserDomain.data';
 
 defaultSetupTeardown();
@@ -49,7 +49,7 @@ describe('UserDomain', () => {
   it('can PUT /user', async () => {
     await request
       .put(`${baseUrl}/user`)
-      .send(updateUserBodyUpdateUserPut)
+      .send(updateUserBodyUpdateUserPatch)
       .set({ Authorization: 'Bearer base64string' })
       .expect(({ status, body }) => {
         expect(status).toBe(200);
@@ -81,9 +81,9 @@ describe('UserDomain', () => {
       });
   });
 
-  it('can GET /user/{userName}', async () => {
+  it('can GET /user/{id}', async () => {
     await request
-      .get(`${baseUrl}/user/${userName}`)
+      .get(`${baseUrl}/user/${id}`)
       .set({ Authorization: 'Bearer base64string' })
       .expect(({ status, body }) => {
         expect(status).toBe(200);

@@ -2,7 +2,7 @@ import { Joi } from 'celebrate';
 
 export default {
   deleteUser: {
-    params: Joi.object({ userId: Joi.string().required() }),
+    params: Joi.object({ id: Joi.string().required() }),
   },
 
   getUsers: {},
@@ -62,7 +62,7 @@ export default {
         images: Joi.array().items(Joi.string().allow('').allow(null)),
       }).allow(null),
     }),
-    params: Joi.object({ userId: Joi.string().required() }),
+    params: Joi.object({ id: Joi.string().required() }),
   },
 
   createUser: {
@@ -132,6 +132,6 @@ export default {
   logoutUser: {},
 
   getUserById: {
-    params: Joi.object({ userId: Joi.string().required() }),
+    params: Joi.object({ id: Joi.string().required() }),
   },
 };

@@ -11,11 +11,11 @@ export default {
   },
 
   deleteCategoryById: {
-    params: Joi.object({ categoryId: Joi.string().required() }),
+    params: Joi.object({ id: Joi.string().required() }),
   },
 
   getCategoryById: {
-    params: Joi.object({ categoryId: Joi.string().required() }),
+    params: Joi.object({ id: Joi.string().required() }),
   },
 
   updateCategory: {
@@ -23,6 +23,6 @@ export default {
       _id: Joi.string().allow('').allow(null),
       name: Joi.string().allow('').allow(null),
     }),
-    params: Joi.object({ categoryId: Joi.string().required() }),
+    params: Joi.object({ id: Joi.string().required() }),
   },
 };

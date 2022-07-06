@@ -1,3 +1,3 @@
 export interface CategoryIdDeletePath {
-  categoryId: string;
+  id: string;
 }

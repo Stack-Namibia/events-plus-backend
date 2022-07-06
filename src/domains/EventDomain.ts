@@ -1,4 +1,4 @@
-import { AddEventPost, Event, EventEventIdDeletePath, EventEventIdGetPath } from '@/http/nodegen/interfaces';
+import { AddEventPost, EventEventIdDeletePath, EventEventIdGetPath } from '@/http/nodegen/interfaces';
 
 import { EventDomainInterface } from '@/http/nodegen/domainInterfaces/EventDomainInterface';
 import { JwtAccess } from '@/http/nodegen/interfaces';
@@ -55,7 +55,7 @@ class EventDomain implements EventDomainInterface {
    * Summary: undefined
    * Description: Returns a single event by id
    **/
-  public async getEventById(jwtData: JwtAccess, params: EventEventIdGetPath): Promise<Event> {
+  public async getEventById(jwtData: JwtAccess, params: EventEventIdGetPath): Promise<any> {
     return EventDomainMock.getEventById(jwtData, params);
   }
 }

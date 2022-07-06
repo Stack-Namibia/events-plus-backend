@@ -7,7 +7,7 @@ export const addTicketBodyAddTicketPost = {
   quantity: 100,
 };
 
-export const pathTicketId = '6e210bfd-4673-493d-aa23-68305a718710';
+export const pathId = '6e210bfd-4673-493d-aa23-68305a718710';
 
 export const validationSchemas: Record<string, Joi.AnySchema> = {
   ticketGet200: Joi.object({

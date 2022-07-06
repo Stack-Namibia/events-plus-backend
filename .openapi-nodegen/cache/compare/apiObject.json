@@ -200,7 +200,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "categoryId",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "string",
@@ -229,7 +229,7 @@
               "components.parameters.PathCategoryId"
             ],
             "interfaceText": {
-              "outputString": "\nexport interface CategoryIdDeletePath {\n    categoryId: string;\n}\n\n"
+              "outputString": "\nexport interface CategoryIdDeletePath {\n    id: string;\n}\n\n"
             }
           }
         },
@@ -244,7 +244,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "categoryId",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "string",
@@ -329,7 +329,7 @@
               "components.parameters.PathCategoryId"
             ],
             "interfaceText": {
-              "outputString": "\nexport interface CategoryIdGetPath {\n    categoryId: string;\n}\n\n"
+              "outputString": "\nexport interface CategoryIdGetPath {\n    id: string;\n}\n\n"
             }
           }
         },
@@ -347,7 +347,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "categoryId",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "string",
@@ -488,7 +488,7 @@
               "components.parameters.PathCategoryId"
             ],
             "interfaceText": {
-              "outputString": "\nexport interface CategoryIdPatchPath {\n    categoryId: string;\n}\n\n"
+              "outputString": "\nexport interface CategoryIdPatchPath {\n    id: string;\n}\n\n"
             }
           }
         },
@@ -1806,7 +1806,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "locationId",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "string",
@@ -1885,7 +1885,7 @@
               "components.parameters.PathLocationId"
             ],
             "interfaceText": {
-              "outputString": "\nexport interface LocationIdGetPath {\n    locationId: string;\n}\n\n"
+              "outputString": "\nexport interface LocationIdGetPath {\n    id: string;\n}\n\n"
             }
           }
         },
@@ -1903,7 +1903,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "locationId",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "string",
@@ -2094,7 +2094,7 @@
               "components.parameters.PathLocationId"
             ],
             "interfaceText": {
-              "outputString": "\nexport interface LocationIdPatchPath {\n    locationId: string;\n}\n\n"
+              "outputString": "\nexport interface LocationIdPatchPath {\n    id: string;\n}\n\n"
             }
           }
         },
@@ -2311,7 +2311,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "ticketId",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "string",
@@ -2409,7 +2409,7 @@
               "components.parameters.PathTicketId"
             ],
             "interfaceText": {
-              "outputString": "\nexport interface TicketIdGetPath {\n    ticketId: string;\n}\n\n"
+              "outputString": "\nexport interface TicketIdGetPath {\n    id: string;\n}\n\n"
             }
           }
         },
@@ -2430,7 +2430,7 @@
         "operationId": "deleteUser",
         "parameters": [
           {
-            "name": "userId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -2460,7 +2460,7 @@
               "components.parameters.PathUserId"
             ],
             "interfaceText": {
-              "outputString": "\nexport interface UserDeletePath {\n    userId: string;\n}\n\n"
+              "outputString": "\nexport interface UserDeletePath {\n    id: string;\n}\n\n"
             }
           }
         },
@@ -2768,7 +2768,7 @@
         "operationId": "updateUser",
         "parameters": [
           {
-            "name": "userId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -3621,7 +3621,7 @@
               "components.parameters.PathUserId"
             ],
             "interfaceText": {
-              "outputString": "\nexport interface UserPatchPath {\n    userId: string;\n}\n\n"
+              "outputString": "\nexport interface UserPatchPath {\n    id: string;\n}\n\n"
             }
           }
         },
@@ -4298,7 +4298,7 @@
         "operationId": "getUserById",
         "parameters": [
           {
-            "name": "userId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -4599,7 +4599,7 @@
               "components.parameters.PathUserId"
             ],
             "interfaceText": {
-              "outputString": "\nexport interface UserIdGetPath {\n    userId: string;\n}\n\n"
+              "outputString": "\nexport interface UserIdGetPath {\n    id: string;\n}\n\n"
             }
           }
         },
@@ -4615,7 +4615,7 @@
     "parameters": {
       "PathCategoryId": {
         "in": "path",
-        "name": "categoryId",
+        "name": "id",
         "required": true,
         "schema": {
           "type": "string",
@@ -4635,7 +4635,7 @@
       },
       "PathLocationId": {
         "in": "path",
-        "name": "locationId",
+        "name": "id",
         "required": true,
         "schema": {
           "type": "string",
@@ -4644,7 +4644,7 @@
       },
       "PathTicketId": {
         "in": "path",
-        "name": "ticketId",
+        "name": "id",
         "required": true,
         "schema": {
           "type": "string",
@@ -4653,7 +4653,7 @@
         }
       },
       "PathUserId": {
-        "name": "userId",
+        "name": "id",
         "in": "path",
         "required": true,
         "schema": {
@@ -5770,19 +5770,19 @@
     {
       "name": "CategoryIdDeletePath",
       "content": {
-        "outputString": "\nexport interface CategoryIdDeletePath {\n    categoryId: string;\n}\n\n"
+        "outputString": "\nexport interface CategoryIdDeletePath {\n    id: string;\n}\n\n"
       }
     },
     {
       "name": "CategoryIdGetPath",
       "content": {
-        "outputString": "\nexport interface CategoryIdGetPath {\n    categoryId: string;\n}\n\n"
+        "outputString": "\nexport interface CategoryIdGetPath {\n    id: string;\n}\n\n"
       }
     },
     {
       "name": "CategoryIdPatchPath",
       "content": {
-        "outputString": "\nexport interface CategoryIdPatchPath {\n    categoryId: string;\n}\n\n"
+        "outputString": "\nexport interface CategoryIdPatchPath {\n    id: string;\n}\n\n"
       }
     },
     {
@@ -5836,13 +5836,13 @@
     {
       "name": "LocationIdGetPath",
       "content": {
-        "outputString": "\nexport interface LocationIdGetPath {\n    locationId: string;\n}\n\n"
+        "outputString": "\nexport interface LocationIdGetPath {\n    id: string;\n}\n\n"
       }
     },
     {
       "name": "LocationIdPatchPath",
       "content": {
-        "outputString": "\nexport interface LocationIdPatchPath {\n    locationId: string;\n}\n\n"
+        "outputString": "\nexport interface LocationIdPatchPath {\n    id: string;\n}\n\n"
       }
     },
     {
@@ -5866,7 +5866,7 @@
     {
       "name": "TicketIdGetPath",
       "content": {
-        "outputString": "\nexport interface TicketIdGetPath {\n    ticketId: string;\n}\n\n"
+        "outputString": "\nexport interface TicketIdGetPath {\n    id: string;\n}\n\n"
       }
     },
     {
@@ -5902,13 +5902,13 @@
     {
       "name": "UserDeletePath",
       "content": {
-        "outputString": "\nexport interface UserDeletePath {\n    userId: string;\n}\n\n"
+        "outputString": "\nexport interface UserDeletePath {\n    id: string;\n}\n\n"
       }
     },
     {
       "name": "UserIdGetPath",
       "content": {
-        "outputString": "\nexport interface UserIdGetPath {\n    userId: string;\n}\n\n"
+        "outputString": "\nexport interface UserIdGetPath {\n    id: string;\n}\n\n"
       }
     },
     {
@@ -5926,7 +5926,7 @@
     {
       "name": "UserPatchPath",
       "content": {
-        "outputString": "\nexport interface UserPatchPath {\n    userId: string;\n}\n\n"
+        "outputString": "\nexport interface UserPatchPath {\n    id: string;\n}\n\n"
       }
     }
   ],

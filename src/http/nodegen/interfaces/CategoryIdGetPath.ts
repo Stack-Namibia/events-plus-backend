@@ -1,3 +1,3 @@
 export interface CategoryIdGetPath {
-  categoryId: string;
+  id: string;
 }

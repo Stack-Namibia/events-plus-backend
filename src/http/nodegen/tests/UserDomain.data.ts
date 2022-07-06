@@ -1,6 +1,6 @@
 import * as Joi from 'joi';
 
-export const pathUserId = '6e210bfd-4673-493d-aa23-68305a718710';
+export const pathId = '6e210bfd-4673-493d-aa23-68305a718710';
 
 export const updateUserBodyUpdateUserPatch = {
   _id: '6e210bfd-4673-493d-aa23-68305a718710',

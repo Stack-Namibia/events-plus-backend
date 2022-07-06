@@ -1,3 +1,3 @@
 export interface LocationIdPatchPath {
-  locationId: string;
+  id: string;
 }

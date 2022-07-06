@@ -18,7 +18,7 @@ export default {
   },
 
   getLocationById: {
-    params: Joi.object({ locationId: Joi.string().required() }),
+    params: Joi.object({ id: Joi.string().required() }),
   },
 
   updateLocation: {
@@ -33,6 +33,6 @@ export default {
       longitude: Joi.string().allow('').allow(null),
       latitude: Joi.string().allow('').allow(null),
     }),
-    params: Joi.object({ locationId: Joi.string().required() }),
+    params: Joi.object({ id: Joi.string().required() }),
   },
 };

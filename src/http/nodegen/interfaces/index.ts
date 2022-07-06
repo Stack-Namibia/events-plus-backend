@@ -30,4 +30,6 @@ export { UserIdGetPath } from './UserIdGetPath';
 export { UserLoginGetQuery } from './UserLoginGetQuery';
 export { UserModel } from './UserModel';
 export { UserPatchPath } from './UserPatchPath';
+export { JwtAccess } from './JwtAccess';
+
 

@@ -1,3 +1,3 @@
 export interface CategoryIdPatchPath {
-  categoryId: string;
+  id: string;
 }

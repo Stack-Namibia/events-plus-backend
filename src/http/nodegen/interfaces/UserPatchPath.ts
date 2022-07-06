@@ -1,3 +1,3 @@
 export interface UserPatchPath {
-  userId: string;
+  id: string;
 }

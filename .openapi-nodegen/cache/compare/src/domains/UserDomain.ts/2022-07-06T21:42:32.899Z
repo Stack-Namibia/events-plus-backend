@@ -1,10 +1,11 @@
 import {
   CreateUserPost,
-  UpdateUserPut,
-  User,
+  UpdateUserPatch,
   UserDeletePath,
+  UserIdGetPath,
   UserLoginGetQuery,
-  UserUserNameGetPath,
+  UserModel,
+  UserPatchPath,
 } from '@/http/nodegen/interfaces';
 
 import { UserDomainInterface } from '@/http/nodegen/domainInterfaces/UserDomainInterface';
@@ -32,8 +33,22 @@ class UserDomain implements UserDomainInterface {
    * Summary: Get all  user
    * Description: get all users from the server.
    **/
-  public async getUsers(jwtData: JwtAccess): Promise<User> {
+  public async getUsers(jwtData: JwtAccess): Promise<UserModel> {
     return UserDomainMock.getUsers(jwtData);
+  }
+
+  /**
+   * Operation ID: updateUser
+   * Path middleware used see: UserDomainInterface.updateUser
+   * Summary: Updated user
+   * Description: This can only be done by the logged in user.
+   **/
+  public async updateUser(
+    body: UpdateUserPatch,
+    jwtData: JwtAccess,
+    params: UserPatchPath
+  ): Promise<UserModel> {
+    return UserDomainMock.updateUser(body, jwtData, params);
   }
 
   /**
@@ -47,20 +62,6 @@ class UserDomain implements UserDomainInterface {
     jwtData: JwtAccess
   ): Promise<any> {
     return UserDomainMock.createUser(body, jwtData);
-  }
-
-  /**
-   * Operation ID: updateUser
-   * Path middleware used see: UserDomainInterface.updateUser
-   * Summary: Updated user
-   * Description: This can only be done by the logged in user.
-   **/
-  public async updateUser(
-    body: UpdateUserPut,
-    jwtData: JwtAccess,
-    params: any
-  ): Promise<User> {
-    return UserDomainMock.updateUser(body, jwtData, params);
   }
 
   /**
@@ -87,16 +88,16 @@ class UserDomain implements UserDomainInterface {
   }
 
   /**
-   * Operation ID: getUserByName
-   * Path middleware used see: UserDomainInterface.getUserByName
+   * Operation ID: getUserById
+   * Path middleware used see: UserDomainInterface.getUserById
    * Summary: undefined
-   * Description: Get user by name
+   * Description: Get user by id
    **/
-  public async getUserByName(
+  public async getUserById(
     jwtData: JwtAccess,
-    params: UserUserNameGetPath
-  ): Promise<User> {
-    return UserDomainMock.getUserByName(jwtData, params);
+    params: UserIdGetPath
+  ): Promise<UserModel> {
+    return UserDomainMock.getUserById(jwtData, params);
   }
 }
 

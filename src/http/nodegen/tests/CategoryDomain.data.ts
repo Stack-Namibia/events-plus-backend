@@ -2,7 +2,7 @@ import * as Joi from 'joi';
 
 export const addCategoryBodyAddCategoryPost = { _id: '5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f', name: 'Concert' };
 
-export const pathCategoryId = '6e210bfd-4673-493d-aa23-68305a718710';
+export const pathId = '6e210bfd-4673-493d-aa23-68305a718710';
 
 export const updateCategoryBodyUpdateCategoryPatch = { _id: '5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f', name: 'Concert' };
 

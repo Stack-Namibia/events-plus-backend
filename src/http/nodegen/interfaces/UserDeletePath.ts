@@ -1,3 +1,3 @@
 export interface UserDeletePath {
-  userId: string;
+  id: string;
 }

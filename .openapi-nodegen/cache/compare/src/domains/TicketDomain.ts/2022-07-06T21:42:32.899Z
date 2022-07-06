@@ -1,0 +1,50 @@
+import {
+  AddTicketPost,
+  TicketIdGetPath,
+  TicketResponse,
+} from '@/http/nodegen/interfaces';
+
+import { TicketDomainInterface } from '@/http/nodegen/domainInterfaces/TicketDomainInterface';
+import { JwtAccess } from '@/http/nodegen/interfaces';
+
+import TicketDomainMock from './__mocks__/TicketDomainMock';
+
+class TicketDomain implements TicketDomainInterface {
+  /**
+   * Operation ID: getTickets
+   * Path middleware used see: TicketDomainInterface.getTickets
+   * Summary: undefined
+   * Description: get all Tickets
+   **/
+  public async getTickets(jwtData: JwtAccess): Promise<TicketResponse> {
+    return TicketDomainMock.getTickets(jwtData);
+  }
+
+  /**
+   * Operation ID: addTicket
+   * Path middleware used see: TicketDomainInterface.addTicket
+   * Summary: undefined
+   * Description: add new Ticket
+   **/
+  public async addTicket(
+    body: AddTicketPost,
+    jwtData: JwtAccess
+  ): Promise<any> {
+    return TicketDomainMock.addTicket(body, jwtData);
+  }
+
+  /**
+   * Operation ID: getTicketById
+   * Path middleware used see: TicketDomainInterface.getTicketById
+   * Summary: undefined
+   * Description: Returns a single Ticket by id
+   **/
+  public async getTicketById(
+    jwtData: JwtAccess,
+    params: TicketIdGetPath
+  ): Promise<TicketResponse> {
+    return TicketDomainMock.getTicketById(jwtData, params);
+  }
+}
+
+export default new TicketDomain();

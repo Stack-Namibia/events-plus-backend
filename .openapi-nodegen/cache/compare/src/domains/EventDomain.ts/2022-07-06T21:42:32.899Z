@@ -1,8 +1,8 @@
 import {
   AddEventPost,
-  Event,
   EventEventIdDeletePath,
   EventEventIdGetPath,
+  EventModel,
   EventResponse,
 } from '@/http/nodegen/interfaces';
 
@@ -54,7 +54,7 @@ class EventDomain implements EventDomainInterface {
   public async getEventById(
     jwtData: JwtAccess,
     params: EventEventIdGetPath
-  ): Promise<Event> {
+  ): Promise<EventModel> {
     return EventDomainMock.getEventById(jwtData, params);
   }
 }

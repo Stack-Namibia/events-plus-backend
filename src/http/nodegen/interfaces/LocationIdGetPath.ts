@@ -1,3 +1,3 @@
 export interface LocationIdGetPath {
-  locationId: string;
+  id: string;
 }

@@ -13,6 +13,6 @@ export default {
   },
 
   getTicketById: {
-    params: Joi.object({ ticketId: Joi.string().required() }),
+    params: Joi.object({ id: Joi.string().required() }),
   },
 };

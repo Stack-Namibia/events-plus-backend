@@ -1,3 +1,3 @@
 export interface TicketIdGetPath {
-  ticketId: string;
+  id: string;
 }

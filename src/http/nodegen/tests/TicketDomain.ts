@@ -25,11 +25,11 @@ export class TestTicketDomain {
 
   // ticketIdGet
   //
-  public static ticketIdGetPath(ticketId: TicketIdGetPath['ticketId'], root: string = baseUrl): string {
+  public static ticketIdGetPath(id: TicketIdGetPath['id'], root: string = baseUrl): string {
     return `${root}/ticket/${id}`;
   }
 
-  public static ticketIdGet(ticketId: TicketIdGetPath['ticketId'], root: string = baseUrl): supertest.Test {
-    return request.get(this.ticketIdGetPath(ticketId, root));
+  public static ticketIdGet(id: TicketIdGetPath['id'], root: string = baseUrl): supertest.Test {
+    return request.get(this.ticketIdGetPath(id, root));
   }
 }

@@ -1,7 +1,7 @@
 import { baseUrl, defaultSetupTeardown, mockAuth, request } from '@/http/nodegen/tests';
 import {
   addLocationBodyAddLocationPost,
-  pathLocationId as locationId,
+  pathId as id,
   responseValidator,
   updateLocationBodyUpdateLocationPatch,
 } from '@/http/nodegen/tests/LocationDomain.data';

@@ -12,7 +12,7 @@ export const addLocationBodyAddLocationPost = {
   latitude: '47.6062095',
 };
 
-export const pathLocationId = '02b65e81-28a7-4ad9-9207-57e6e93f0988';
+export const pathId = 'd10f6bcc-87dd-4e26-8289-d72bba95444a';
 
 export const updateLocationBodyUpdateLocationPatch = {
   _id: '5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f',
