@@ -2558,9 +2558,9 @@ etag@~1.8.1:
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==
 
-"events-plus-swagger@git+ssh://git@github.com:Stack-Namibia/events-plus-swagger":
+"events-plus-swagger@git+https://github.com/Stack-Namibia/events-plus-swagger.git":
   version "1.0.0"
-  resolved "git+ssh://git@github.com:Stack-Namibia/events-plus-swagger#f2a7f13961648dc747abae2b053d3642c3e74ecd"
+  resolved "git+https://github.com/Stack-Namibia/events-plus-swagger.git#cd500437d1bdb16819a677a2cb40c630df288c2a"
   dependencies:
     boats "^2.35.0"
 
