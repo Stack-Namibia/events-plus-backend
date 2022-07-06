@@ -3,9 +3,9 @@ import { mockItGenerator } from 'generate-it-mockers';
 import { JwtAccess } from '@/http/nodegen/interfaces/JwtAccess';
 
 import { AddEventPost } from '@/http/nodegen/interfaces/AddEventPost';
-import { Event } from '@/http/nodegen/interfaces/Event';
 import { EventEventIdDeletePath } from '@/http/nodegen/interfaces/EventEventIdDeletePath';
 import { EventEventIdGetPath } from '@/http/nodegen/interfaces/EventEventIdGetPath';
+import { EventModel } from '@/http/nodegen/interfaces/EventModel';
 import { EventResponse } from '@/http/nodegen/interfaces/EventResponse';
 
 class EventDomainMock {
@@ -91,8 +91,8 @@ class EventDomainMock {
                 items: {
                   type: 'object',
                   properties: {
-                    _id: { type: 'integer', format: 'uuid' },
-                    type: { type: 'string', enum: ['VIP', 'General'] },
+                    _id: { type: 'string', format: 'uuid' },
+                    type: { type: 'string', enum: ['VIP', 'VVIP', 'General'] },
                     price: { type: 'number' },
                     quantity: { type: 'integer' },
                   },
@@ -199,7 +199,7 @@ class EventDomainMock {
   async getEventById(
     jwtData: JwtAccess,
     pathParams: EventEventIdGetPath
-  ): Promise<Event> {
+  ): Promise<EventModel> {
     return mockItGenerator({
       type: 'object',
       properties: {
@@ -271,8 +271,8 @@ class EventDomainMock {
           items: {
             type: 'object',
             properties: {
-              _id: { type: 'integer', format: 'uuid' },
-              type: { type: 'string', enum: ['VIP', 'General'] },
+              _id: { type: 'string', format: 'uuid' },
+              type: { type: 'string', enum: ['VIP', 'VVIP', 'General'] },
               price: { type: 'number' },
               quantity: { type: 'integer' },
             },

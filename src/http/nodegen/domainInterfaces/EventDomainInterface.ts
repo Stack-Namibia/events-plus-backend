@@ -1,8 +1,8 @@
 import {
   AddEventPost,
-  Event,
   EventEventIdDeletePath,
   EventEventIdGetPath,
+  EventModel,
   EventResponse,
 } from '@/http/nodegen/interfaces';
 import { JwtAccess } from '@/http/nodegen/interfaces';
@@ -41,5 +41,8 @@ export interface EventDomainInterface {
    * Description: Returns a single event by id
    * Security header(s): ['Authorization']
    **/
-  getEventById(jwtData: JwtAccess, params: EventEventIdGetPath): Promise<Event>;
+  getEventById(
+    jwtData: JwtAccess,
+    params: EventEventIdGetPath
+  ): Promise<EventModel>;
 }

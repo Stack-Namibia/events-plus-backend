@@ -31,13 +31,10 @@ export default {
         latitude: String,
       },
       attendance: Number,
-      tickets: [{ _id: Number, type: String, price: Number, quantity: Number }],
+      tickets: [{ _id: String, type: String, price: Number, quantity: Number }],
       images: [String],
     },
   },
-
-  // createUser
-  createUser: {},
 
   // updateUser
   updateUser: {
@@ -68,10 +65,13 @@ export default {
         latitude: String,
       },
       attendance: Number,
-      tickets: [{ _id: Number, type: String, price: Number, quantity: Number }],
+      tickets: [{ _id: String, type: String, price: Number, quantity: Number }],
       images: [String],
     },
   },
+
+  // createUser
+  createUser: {},
 
   // login
   login: {},
@@ -79,8 +79,8 @@ export default {
   // logoutUser
   logoutUser: {},
 
-  // getUserByName
-  getUserByName: {
+  // getUserById
+  getUserById: {
     _id: String,
     first_name: String,
     last_name: String,
@@ -108,7 +108,7 @@ export default {
         latitude: String,
       },
       attendance: Number,
-      tickets: [{ _id: Number, type: String, price: Number, quantity: Number }],
+      tickets: [{ _id: String, type: String, price: Number, quantity: Number }],
       images: [String],
     },
   },

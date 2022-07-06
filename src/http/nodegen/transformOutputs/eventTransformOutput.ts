@@ -25,7 +25,7 @@ export default {
         },
         attendance: Number,
         tickets: [
-          { _id: Number, type: String, price: Number, quantity: Number },
+          { _id: String, type: String, price: Number, quantity: Number },
         ],
         images: [String],
       },
@@ -66,7 +66,7 @@ export default {
       latitude: String,
     },
     attendance: Number,
-    tickets: [{ _id: Number, type: String, price: Number, quantity: Number }],
+    tickets: [{ _id: String, type: String, price: Number, quantity: Number }],
     images: [String],
   },
 };

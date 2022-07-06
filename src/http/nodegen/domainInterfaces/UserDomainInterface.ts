@@ -1,10 +1,11 @@
 import {
   CreateUserPost,
-  UpdateUserPut,
-  User,
+  UpdateUserPatch,
   UserDeletePath,
+  UserIdGetPath,
   UserLoginGetQuery,
-  UserUserNameGetPath,
+  UserModel,
+  UserPatchPath,
 } from '@/http/nodegen/interfaces';
 import { JwtAccess } from '@/http/nodegen/interfaces';
 
@@ -23,15 +24,7 @@ export interface UserDomainInterface {
    * Description: get all users from the server.
    * Security header(s): ['Authorization']
    **/
-  getUsers(jwtData: JwtAccess): Promise<User>;
-
-  /**
-   * Operation ID: createUser
-   * Summary: Create user
-   * Description: This can only be done by the logged in user.
-   * Security header(s): ['Authorization']
-   **/
-  createUser(body: CreateUserPost, jwtData: JwtAccess): Promise<any>;
+  getUsers(jwtData: JwtAccess): Promise<UserModel>;
 
   /**
    * Operation ID: updateUser
@@ -40,10 +33,18 @@ export interface UserDomainInterface {
    * Security header(s): ['Authorization']
    **/
   updateUser(
-    body: UpdateUserPut,
+    body: UpdateUserPatch,
     jwtData: JwtAccess,
-    params: any
-  ): Promise<User>;
+    params: UserPatchPath
+  ): Promise<UserModel>;
+
+  /**
+   * Operation ID: createUser
+   * Summary: Create user
+   * Description: This can only be done by the logged in user.
+   * Security header(s): ['Authorization']
+   **/
+  createUser(body: CreateUserPost, jwtData: JwtAccess): Promise<any>;
 
   /**
    * Operation ID: login
@@ -62,10 +63,10 @@ export interface UserDomainInterface {
   logoutUser(jwtData: JwtAccess): Promise<any>;
 
   /**
-   * Operation ID: getUserByName
+   * Operation ID: getUserById
    * Summary: undefined
-   * Description: Get user by name
+   * Description: Get user by id
    * Security header(s): ['Authorization']
    **/
-  getUserByName(jwtData: JwtAccess, params: UserUserNameGetPath): Promise<User>;
+  getUserById(jwtData: JwtAccess, params: UserIdGetPath): Promise<UserModel>;
 }

@@ -1,16 +1,16 @@
-import { UserDeletePath, UserUserNameGetPath } from '@/http/nodegen/interfaces';
+import { UserDeletePath, UserIdGetPath, UserPatchPath } from '@/http/nodegen/interfaces';
 import { baseUrl, request } from '@/http/nodegen/tests';
 import * as supertest from 'supertest';
 
 export class TestUserDomain {
   // userDelete
   //
-  public static userDeletePath(userName: UserDeletePath['userName'], root: string = baseUrl): string {
+  public static userDeletePath(userId: UserDeletePath['userId'], root: string = baseUrl): string {
     return `${root}/user`;
   }
 
-  public static userDelete(userName: UserDeletePath['userName'], root: string = baseUrl): supertest.Test {
-    return request.delete(this.userDeletePath(userName, root));
+  public static userDelete(userId: UserDeletePath['userId'], root: string = baseUrl): supertest.Test {
+    return request.delete(this.userDeletePath(userId, root));
   }
 
   // userGet
@@ -23,6 +23,16 @@ export class TestUserDomain {
     return request.get(this.userGetPath(root));
   }
 
+  // userPatch
+  //
+  public static userPatchPath(userId: UserPatchPath['userId'], root: string = baseUrl): string {
+    return `${root}/user`;
+  }
+
+  public static userPatch(userId: UserPatchPath['userId'], root: string = baseUrl): supertest.Test {
+    return request.patch(this.userPatchPath(userId, root));
+  }
+
   // userPost
   //
   public static userPostPath(root: string = baseUrl): string {
@@ -31,16 +41,6 @@ export class TestUserDomain {
 
   public static userPost(root: string = baseUrl): supertest.Test {
     return request.post(this.userPostPath(root));
-  }
-
-  // userPut
-  //
-  public static userPutPath(userName: any['userName'], root: string = baseUrl): string {
-    return `${root}/user`;
-  }
-
-  public static userPut(userName: any['userName'], root: string = baseUrl): supertest.Test {
-    return request.put(this.userPutPath(userName, root));
   }
 
   // userLoginGet
@@ -63,13 +63,13 @@ export class TestUserDomain {
     return request.get(this.userLogoutGetPath(root));
   }
 
-  // userUserNameGet
+  // userIdGet
   //
-  public static userUserNameGetPath(userName: UserUserNameGetPath['userName'], root: string = baseUrl): string {
-    return `${root}/user/${userName}`;
+  public static userIdGetPath(userId: UserIdGetPath['userId'], root: string = baseUrl): string {
+    return `${root}/user/${id}`;
   }
 
-  public static userUserNameGet(userName: UserUserNameGetPath['userName'], root: string = baseUrl): supertest.Test {
-    return request.get(this.userUserNameGetPath(userName, root));
+  public static userIdGet(userId: UserIdGetPath['userId'], root: string = baseUrl): supertest.Test {
+    return request.get(this.userIdGetPath(userId, root));
   }
 }

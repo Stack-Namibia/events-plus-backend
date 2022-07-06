@@ -38,8 +38,11 @@ export default {
       attendance: Joi.number().integer().allow(null),
       tickets: Joi.array().items(
         Joi.object({
-          _id: Joi.number().integer().allow(null),
-          type: Joi.string().allow('').valid('VIP', 'General').allow(null),
+          _id: Joi.string().allow('').allow(null),
+          type: Joi.string()
+            .allow('')
+            .valid('VIP', 'VVIP', 'General')
+            .allow(null),
           price: Joi.number().allow(null),
           quantity: Joi.number().integer().allow(null),
         }).allow(null)

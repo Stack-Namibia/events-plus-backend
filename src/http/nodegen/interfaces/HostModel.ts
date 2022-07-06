@@ -1,4 +1,4 @@
-export interface EventHost {
+export interface HostModel {
   _id?: string;
   email?: string;
   name?: string;

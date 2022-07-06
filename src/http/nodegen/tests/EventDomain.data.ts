@@ -41,7 +41,7 @@ export const addEventBodyAddEventPost = {
   ],
 };
 
-export const pathEventId = '7Txrk8OBTXaTbVHOgNSKL7';
+export const pathEventId = '6e210bfd-4673-493d-aa23-68305a718710';
 
 export const validationSchemas: Record<string, Joi.AnySchema> = {
   eventGet200: Joi.object({
@@ -77,8 +77,8 @@ export const validationSchemas: Record<string, Joi.AnySchema> = {
         attendance: Joi.number().integer().allow(null),
         tickets: Joi.array().items(
           Joi.object({
-            _id: Joi.number().integer().allow(null),
-            type: Joi.string().allow('').valid('VIP', 'General').allow(null),
+            _id: Joi.string().allow('').allow(null),
+            type: Joi.string().allow('').valid('VIP', 'VVIP', 'General').allow(null),
             price: Joi.number().allow(null),
             quantity: Joi.number().integer().allow(null),
           }).allow(null)
@@ -127,8 +127,8 @@ export const validationSchemas: Record<string, Joi.AnySchema> = {
         attendance: Joi.number().integer().allow(null),
         tickets: Joi.array().items(
           Joi.object({
-            _id: Joi.number().integer().allow(null),
-            type: Joi.string().allow('').valid('VIP', 'General').allow(null),
+            _id: Joi.string().allow('').allow(null),
+            type: Joi.string().allow('').valid('VIP', 'VVIP', 'General').allow(null),
             price: Joi.number().allow(null),
             quantity: Joi.number().integer().allow(null),
           }).allow(null)
@@ -179,8 +179,8 @@ export const validationSchemas: Record<string, Joi.AnySchema> = {
     attendance: Joi.number().integer().allow(null),
     tickets: Joi.array().items(
       Joi.object({
-        _id: Joi.number().integer().allow(null),
-        type: Joi.string().allow('').valid('VIP', 'General').allow(null),
+        _id: Joi.string().allow('').allow(null),
+        type: Joi.string().allow('').valid('VIP', 'VVIP', 'General').allow(null),
         price: Joi.number().allow(null),
         quantity: Joi.number().integer().allow(null),
       }).allow(null)
@@ -218,8 +218,8 @@ export const validationSchemas: Record<string, Joi.AnySchema> = {
     attendance: Joi.number().integer().allow(null),
     tickets: Joi.array().items(
       Joi.object({
-        _id: Joi.number().integer().allow(null),
-        type: Joi.string().allow('').valid('VIP', 'General').allow(null),
+        _id: Joi.string().allow('').allow(null),
+        type: Joi.string().allow('').valid('VIP', 'VVIP', 'General').allow(null),
         price: Joi.number().allow(null),
         quantity: Joi.number().integer().allow(null),
       }).allow(null)

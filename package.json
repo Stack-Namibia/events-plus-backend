@@ -21,8 +21,8 @@
     "test:unit:single": "jest --clearCache && ENVIRONMENT=test && jest --collect-coverage false --verbose --forceExit --detectOpenHandles",
     "generate": "generate-it node_modules/events-plus-swagger/build/full-latest.yml --yes -m -t https://github.com/acrontum/openapi-nodegen-typescript-server.git",
     "link:generate": "yarn link events-plus-swagger && yarn generate",
-    "git:generate": "yarn install git+https://github.com/Stack-Namibia/events-plus-swagger.git && yarn generate",
-    "ci": "yarn install --frozen-lockfile"
+    "git:generate": "yarn add git+https://github.com/Stack-Namibia/events-plus-swagger.git && yarn generate",
+    "ci": "yarn add --frozen-lockfile"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",

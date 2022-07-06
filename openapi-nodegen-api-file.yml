@@ -20,6 +20,100 @@ servers:
         default: '8080'
   - url: http://api.eventsplus.com/v1
 paths:
+  /category:
+    get:
+      tags:
+        - Category
+      description: get all Categories
+      operationId: getCategories
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventCategoryResponse'
+        '400':
+          description: No Categories found
+      security:
+        - jwtToken: []
+    post:
+      tags:
+        - Category
+      description: add new category
+      operationId: addCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventCategory'
+      responses:
+        '405':
+          description: Invalid input
+      security:
+        - jwtToken: []
+  /category/{id}:
+    delete:
+      tags:
+        - Category
+      description: Delete Category based on path parameter
+      operationId: deleteCategoryById
+      parameters:
+        - $ref: '#/components/parameters/PathCategoryId'
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Category not found
+      security:
+        - jwtToken: []
+    get:
+      tags:
+        - Category
+      description: Returns a single category by id
+      operationId: getCategoryById
+      parameters:
+        - $ref: '#/components/parameters/PathCategoryId'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventCategoryResponse'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: category not found
+      security:
+        - jwtToken: []
+    patch:
+      tags:
+        - Category
+      summary: Updated Category
+      description: This can only be done by the logged in Category.
+      operationId: updateCategory
+      parameters:
+        - $ref: '#/components/parameters/PathCategoryId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventCategory'
+      responses:
+        '200':
+          description: Category successfully returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventCategoryResponse'
+        '400':
+          description: Invalid Category supplied
+        '404':
+          description: Category not found
+      security:
+        - jwtToken: []
   /event:
     get:
       tags:
@@ -44,7 +138,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Event'
+              $ref: '#/components/schemas/EventModel'
       responses:
         '405':
           description: Invalid input
@@ -76,11 +170,144 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Event'
+                $ref: '#/components/schemas/EventModel'
         '400':
           description: Invalid ID supplied
         '404':
           description: Event not found
+      security:
+        - jwtToken: []
+  /location:
+    get:
+      tags:
+        - Location
+      description: get all Locations
+      operationId: getLocations
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationResponse'
+        '400':
+          description: No locations found
+      security:
+        - jwtToken: []
+    post:
+      tags:
+        - Location
+      description: add new Location
+      operationId: addLocation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationModel'
+      responses:
+        '405':
+          description: Invalid input
+      security:
+        - jwtToken: []
+  /location/{id}:
+    get:
+      tags:
+        - Location
+      description: Returns a single Location by id
+      operationId: getLocationById
+      parameters:
+        - $ref: '#/components/parameters/PathLocationId'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationModel'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Location not found
+      security:
+        - jwtToken: []
+    patch:
+      tags:
+        - Location
+      summary: Updated Location
+      description: This can only be done by the logged in Location.
+      operationId: updateLocation
+      parameters:
+        - $ref: '#/components/parameters/PathLocationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationModel'
+      responses:
+        '200':
+          description: Location successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationModel'
+        '400':
+          description: Invalid Location supplied
+        '404':
+          description: Location not found
+      security:
+        - jwtToken: []
+  /ticket:
+    get:
+      tags:
+        - Ticket
+      description: get all Tickets
+      operationId: getTickets
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketResponse'
+        '400':
+          description: No Tickets found
+      security:
+        - jwtToken: []
+    post:
+      tags:
+        - Ticket
+      description: add new Ticket
+      operationId: addTicket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TicketModel'
+      responses:
+        '405':
+          description: Invalid input
+      security:
+        - jwtToken: []
+  /ticket/{id}:
+    get:
+      tags:
+        - Ticket
+      description: Returns a single Ticket by id
+      operationId: getTicketById
+      parameters:
+        - $ref: '#/components/parameters/PathTicketId'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketResponse'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Ticket not found
       security:
         - jwtToken: []
   /user:
@@ -91,7 +318,7 @@ paths:
       description: This can only be done by the logged in user.
       operationId: deleteUser
       parameters:
-        - $ref: '#/components/parameters/PathUserName'
+        - $ref: '#/components/parameters/PathUserId'
       responses:
         '400':
           description: Invalid username supplied
@@ -111,9 +338,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/UserModel'
         '400':
           description: No users found
+      security:
+        - jwtToken: []
+    patch:
+      tags:
+        - User
+      summary: Updated user
+      description: This can only be done by the logged in user.
+      operationId: updateUser
+      parameters:
+        - $ref: '#/components/parameters/PathUserId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserModel'
+      responses:
+        '200':
+          description: User successfully returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserModel'
+        '400':
+          description: Invalid user supplied
+        '404':
+          description: User not found
       security:
         - jwtToken: []
     post:
@@ -126,42 +380,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserModel'
       responses:
         '405':
           description: Invalid input
-      security:
-        - jwtToken: []
-    put:
-      tags:
-        - User
-      summary: Updated user
-      description: This can only be done by the logged in user.
-      operationId: updateUser
-      parameters:
-        - name: userName
-          in: path
-          required: true
-          schema:
-            type: string
-            example: Herobiam
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-      responses:
-        '200':
-          description: User successfully returned
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        '400':
-          description: Invalid user supplied
-        '404':
-          description: User not found
       security:
         - jwtToken: []
   /user/login:
@@ -178,6 +400,7 @@ paths:
           required: true
           schema:
             type: string
+            format: uuid
             example: stack@123
       responses:
         '200':
@@ -199,21 +422,21 @@ paths:
           description: successful operation
       security:
         - jwtToken: []
-  /user/{userName}:
+  /user/{id}:
     get:
       tags:
         - User
-      description: Get user by name
-      operationId: getUserByName
+      description: Get user by id
+      operationId: getUserById
       parameters:
-        - $ref: '#/components/parameters/PathUserName'
+        - $ref: '#/components/parameters/PathUserId'
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/UserModel'
         '400':
           description: Invalid username supplied
         '404':
@@ -222,25 +445,52 @@ paths:
         - jwtToken: []
 components:
   parameters:
+    PathCategoryId:
+      in: path
+      name: categoryId
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 6e210bfd-4673-493d-aa23-68305a718710
     PathEventId:
       in: path
       name: eventId
       required: true
       schema:
         type: string
-    PathUserName:
-      name: userName
+        format: uuid
+        example: 6e210bfd-4673-493d-aa23-68305a718710
+    PathLocationId:
+      in: path
+      name: locationId
+      required: true
+      schema:
+        type: string
+        format: uuid
+    PathTicketId:
+      in: path
+      name: ticketId
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 6e210bfd-4673-493d-aa23-68305a718710
+    PathUserId:
+      name: userId
       in: path
       required: true
       schema:
         type: string
-        example: Herobiam
+        format: uuid
+        example: 6e210bfd-4673-493d-aa23-68305a718710
     QueryPassword:
       in: query
       name: password
       required: true
       schema:
         type: string
+        format: uuid
         example: stack@123
     QueryUsername:
       in: query
@@ -248,7 +498,8 @@ components:
       required: true
       schema:
         type: string
-        example: Herobiam/hherobiam@gmail.com
+        format: email
+        example: hherobiam@gmail.com
   schemas:
     EventCategory:
       type: object
@@ -261,57 +512,7 @@ components:
       example:
         _id: 5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f
         name: Concert
-    EventHost:
-      type: object
-      properties:
-        _id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        email:
-          type: string
-          format: email
-        phoneNumber:
-          type: string
-      example:
-        _id: 5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f
-        name: Seattle Coffee
-        email: host@gmail.com
-        phone_no: '123456789'
-    EventLocation:
-      type: object
-      properties:
-        _id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        address:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zip:
-          type: string
-        country:
-          type: string
-        longitude:
-          type: string
-        latitude:
-          type: string
-      example:
-        _id: 5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f
-        name: Seattle Coffee
-        address: '123456789'
-        city: Seattle
-        state: WA
-        zip: '98000'
-        country: USA
-        longitude: '-122.3320708'
-        latitude: '47.6062095'
-    EventResponse:
+    EventCategoryResponse:
       type: object
       required:
         - data
@@ -319,30 +520,10 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/Event'
+            $ref: '#/components/schemas/EventCategory'
         meta:
           $ref: '#/components/schemas/Meta'
-    EventTickets:
-      type: object
-      properties:
-        _id:
-          type: integer
-          format: uuid
-        type:
-          type: string
-          enum:
-            - VIP
-            - General
-        price:
-          type: number
-        quantity:
-          type: integer
-      example:
-        _id: 5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f
-        type: General Admission
-        price: 150
-        quantity: 100
-    Event:
+    EventModel:
       type: object
       properties:
         _id:
@@ -357,7 +538,7 @@ components:
         host:
           type: array
           items:
-            $ref: '#/components/schemas/EventHost'
+            $ref: '#/components/schemas/HostModel'
         category:
           type: array
           items:
@@ -368,14 +549,14 @@ components:
         endTime:
           type: string
         location:
-          $ref: '#/components/schemas/EventLocation'
+          $ref: '#/components/schemas/LocationModel'
         attendance:
           type: integer
           format: int32
         tickets:
           type: array
           items:
-            $ref: '#/components/schemas/EventTickets'
+            $ref: '#/components/schemas/TicketModel'
         images:
           type: array
           items:
@@ -420,6 +601,78 @@ components:
         images:
           - url: >-
               https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60
+    EventResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventModel'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    HostModel:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phoneNumber:
+          type: string
+      example:
+        _id: 5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f
+        name: Seattle Coffee
+        email: host@gmail.com
+        phone_no: '123456789'
+    LocationModel:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+        longitude:
+          type: string
+        latitude:
+          type: string
+      example:
+        _id: 5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f
+        name: Seattle Coffee
+        address: '123456789'
+        city: Seattle
+        state: WA
+        zip: '98000'
+        country: USA
+        longitude: '-122.3320708'
+        latitude: '47.6062095'
+    LocationResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationModel'
+        meta:
+          $ref: '#/components/schemas/Meta'
     Meta:
       type: object
       properties:
@@ -435,7 +688,39 @@ components:
         orderedBy:
           type: string
       additionalProperties: true
-    User:
+    TicketModel:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum:
+            - VIP
+            - VVIP
+            - General
+        price:
+          type: number
+        quantity:
+          type: integer
+      example:
+        _id: 5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f
+        type: General Admission
+        price: 150
+        quantity: 100
+    TicketResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TicketModel'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    UserModel:
       type: object
       properties:
         _id:
@@ -461,7 +746,7 @@ components:
         auth_token:
           type: string
         favorites:
-          $ref: '#/components/schemas/Event'
+          $ref: '#/components/schemas/EventModel'
       example:
         _id: 6e210bfd-4673-493d-aa23-68305a718710
         first_name: Kathryn

@@ -1,4 +1,4 @@
-export interface EventLocation {
+export interface AddLocationPost {
   _id?: string;
   address?: string;
   city?: string;

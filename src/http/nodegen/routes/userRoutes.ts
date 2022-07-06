@@ -61,6 +61,32 @@ export default function () {
   );
 
   /**
+   * Operation ID: updateUser
+   * Summary: Updated user
+   * Description: This can only be done by the logged in user.
+   */
+
+  router.patch(
+    '/',
+    accessTokenMiddleware([
+      'Authorization',
+    ]) /* Validate request security tokens */,
+
+    celebrate(
+      userValidators.updateUser
+    ) /* Validate the request data and return validation errors, options passed in via x-joi-options */,
+
+    async (req: any, res: GenerateItExpressResponse) => {
+      res.inferResponseType(
+        await UserDomain.updateUser(req.body, req.jwtData, req.params),
+        200,
+        undefined,
+        userTransformOutputs.updateUser
+      );
+    }
+  );
+
+  /**
    * Operation ID: createUser
    * Summary: Create user
    * Description: This can only be done by the logged in user.
@@ -82,32 +108,6 @@ export default function () {
         200,
         undefined,
         userTransformOutputs.createUser
-      );
-    }
-  );
-
-  /**
-   * Operation ID: updateUser
-   * Summary: Updated user
-   * Description: This can only be done by the logged in user.
-   */
-
-  router.put(
-    '/',
-    accessTokenMiddleware([
-      'Authorization',
-    ]) /* Validate request security tokens */,
-
-    celebrate(
-      userValidators.updateUser
-    ) /* Validate the request data and return validation errors, options passed in via x-joi-options */,
-
-    async (req: any, res: GenerateItExpressResponse) => {
-      res.inferResponseType(
-        await UserDomain.updateUser(req.body, req.jwtData, req.params),
-        200,
-        undefined,
-        userTransformOutputs.updateUser
       );
     }
   );
@@ -161,27 +161,27 @@ export default function () {
   );
 
   /**
-   * Operation ID: getUserByName
+   * Operation ID: getUserById
    *
-   * Description: Get user by name
+   * Description: Get user by id
    */
 
   router.get(
-    '/:userName',
+    '/:id',
     accessTokenMiddleware([
       'Authorization',
     ]) /* Validate request security tokens */,
 
     celebrate(
-      userValidators.getUserByName
+      userValidators.getUserById
     ) /* Validate the request data and return validation errors, options passed in via x-joi-options */,
 
     async (req: any, res: GenerateItExpressResponse) => {
       res.inferResponseType(
-        await UserDomain.getUserByName(req.jwtData, req.params),
+        await UserDomain.getUserById(req.jwtData, req.params),
         200,
         undefined,
-        userTransformOutputs.getUserByName
+        userTransformOutputs.getUserById
       );
     }
   );
