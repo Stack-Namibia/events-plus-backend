@@ -1,13 +1,10 @@
-import {
-  AuthorizeUserModel,
-  RegisterUserPost,
-} from '@/http/nodegen/interfaces';
+import { AuthorizeUserModel, RegisterUserPost } from '@/http/nodegen/interfaces';
 
 import { RegisterDomainInterface } from '@/http/nodegen/domainInterfaces/RegisterDomainInterface';
 import { JwtAccess } from '@/http/nodegen/interfaces';
 import NodegenRequest from '../http/interfaces/NodegenRequest';
-
-import RegisterDomainMock from './__mocks__/RegisterDomainMock';
+import { UserModel } from '@/database/models';
+import AccessTokenService from '@/services/AccessTokenService';
 
 class RegisterDomain implements RegisterDomainInterface {
   /**
@@ -21,7 +18,16 @@ class RegisterDomain implements RegisterDomainInterface {
     jwtData: JwtAccess,
     req: NodegenRequest
   ): Promise<AuthorizeUserModel> {
-    return RegisterDomainMock.registerUser(body, jwtData, req);
+    const user = new UserModel({ ...(body.user as any), id: jwtData.sub });
+    await user.save();
+    const token = AccessTokenService.generateJWToken({
+      sessionData: { sub: jwtData.sub },
+      maxAge: 3600,
+    });
+    return {
+      token,
+      user: user.toJSON(),
+    };
   }
 }
 
