@@ -1,5 +1,13 @@
 import * as Joi from 'joi';
 
+export const getCategoriesQueryLimit = 8;
+
+export const getCategoriesQuerySkip = 83;
+
+export const getCategoriesQueryMatch = 'sr93Zr6MBkNps4WydO';
+
+export const getCategoriesQuerySort = 'q4ky4UuFjTawtwR';
+
 export const addCategoryBodyAddCategoryPost = { _id: '5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f', name: 'Concert' };
 
 export const pathId = '6e210bfd-4673-493d-aa23-68305a718710';
@@ -31,10 +39,20 @@ export const validationSchemas: Record<string, Joi.AnySchema> = {
       orderedBy: Joi.string().allow('').allow(null),
     }).allow(null),
   }).allow(null),
-  categoryGet400: Joi.object({}),
-  categoryPost405: Joi.object({}),
-  categoryIdDelete400: Joi.object({}),
+  categoryGet401: Joi.object({}),
+  categoryGet403: Joi.object({}),
+  categoryGet404: Joi.object({}),
+  categoryGet500: Joi.object({}),
+  categoryPost401: Joi.object({}),
+  categoryPost403: Joi.object({}),
+  categoryPost422: Joi.object({}),
+  categoryPost500: Joi.object({}),
+  categoryIdDelete201: Joi.object({}),
+  categoryIdDeleteSuccess: Joi.object({}),
+  categoryIdDelete401: Joi.object({}),
+  categoryIdDelete403: Joi.object({}),
   categoryIdDelete404: Joi.object({}),
+  categoryIdDelete500: Joi.object({}),
   categoryIdGet200: Joi.object({
     data: Joi.array().items(
       Joi.object({ _id: Joi.string().allow('').allow(null), name: Joi.string().allow('').allow(null) }).allow(null)
@@ -59,8 +77,10 @@ export const validationSchemas: Record<string, Joi.AnySchema> = {
       orderedBy: Joi.string().allow('').allow(null),
     }).allow(null),
   }).allow(null),
-  categoryIdGet400: Joi.object({}),
+  categoryIdGet401: Joi.object({}),
+  categoryIdGet403: Joi.object({}),
   categoryIdGet404: Joi.object({}),
+  categoryIdGet500: Joi.object({}),
   categoryIdPatch200: Joi.object({
     data: Joi.array().items(
       Joi.object({ _id: Joi.string().allow('').allow(null), name: Joi.string().allow('').allow(null) }).allow(null)
@@ -85,8 +105,11 @@ export const validationSchemas: Record<string, Joi.AnySchema> = {
       orderedBy: Joi.string().allow('').allow(null),
     }).allow(null),
   }).allow(null),
-  categoryIdPatch400: Joi.object({}),
+  categoryIdPatch401: Joi.object({}),
+  categoryIdPatch403: Joi.object({}),
   categoryIdPatch404: Joi.object({}),
+  categoryIdPatch422: Joi.object({}),
+  categoryIdPatch500: Joi.object({}),
 };
 
 /**

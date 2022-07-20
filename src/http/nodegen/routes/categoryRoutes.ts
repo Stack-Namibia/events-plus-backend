@@ -24,9 +24,13 @@ export default function () {
       'Authorization',
     ]) /* Validate request security tokens */,
 
+    celebrate(
+      categoryValidators.getCategories
+    ) /* Validate the request data and return validation errors, options passed in via x-joi-options */,
+
     async (req: any, res: GenerateItExpressResponse) => {
       res.inferResponseType(
-        await CategoryDomain.getCategories(req.jwtData),
+        await CategoryDomain.getCategories(req.jwtData, req.query),
         200,
         undefined,
         categoryTransformOutputs.getCategories
@@ -79,7 +83,7 @@ export default function () {
     async (req: any, res: GenerateItExpressResponse) => {
       res.inferResponseType(
         await CategoryDomain.deleteCategoryById(req.jwtData, req.params),
-        200,
+        201,
         undefined,
         categoryTransformOutputs.deleteCategoryById
       );

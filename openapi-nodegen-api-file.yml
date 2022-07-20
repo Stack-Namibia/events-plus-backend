@@ -20,12 +20,40 @@ servers:
         default: '8080'
   - url: http://api.eventsplus.com/v1
 paths:
+  /authorize:
+    get:
+      tags:
+        - authorize
+      summary: Login/Sign in user
+      description: Exchange a firebase token with an api token
+      operationId: authorize
+      responses:
+        '200':
+          description: User successfully authorized
+          headers:
+            X-token:
+              schema:
+                $ref: '#/components/schemas/AuthorizeToken'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizeModel'
+        '401':
+          description: User not authenticated
+      x-passRequest: true
+      security:
+        - jwtToken: []
   /category:
     get:
       tags:
         - Category
       description: get all Categories
       operationId: getCategories
+      parameters:
+        - $ref: '#/components/parameters/QueryLimit'
+        - $ref: '#/components/parameters/QuerySkip'
+        - $ref: '#/components/parameters/QueryMatch'
+        - $ref: '#/components/parameters/QuerySort'
       responses:
         '200':
           description: successful operation
@@ -33,8 +61,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EventCategoryResponse'
-        '400':
-          description: No Categories found
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
+        '404':
+          description: Category not found
+        '500':
+          description: Internal server error or unknown error
       security:
         - jwtToken: []
     post:
@@ -48,8 +82,14 @@ paths:
             schema:
               $ref: '#/components/schemas/EventCategory'
       responses:
-        '405':
-          description: Invalid input
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
+        '422':
+          description: Input validation failed
+        '500':
+          description: Internal server error or unknown error
       security:
         - jwtToken: []
   /category/{id}:
@@ -61,10 +101,16 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PathCategoryId'
       responses:
-        '400':
-          description: Invalid ID supplied
+        '201':
+          description: Category successfully deleted
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
         '404':
           description: Category not found
+        '500':
+          description: Internal server error or unknown error
       security:
         - jwtToken: []
     get:
@@ -81,10 +127,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EventCategoryResponse'
-        '400':
-          description: Invalid ID supplied
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
         '404':
-          description: category not found
+          description: Category not found
+        '500':
+          description: Internal server error or unknown error
       security:
         - jwtToken: []
     patch:
@@ -108,10 +158,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EventCategoryResponse'
-        '400':
-          description: Invalid Category supplied
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
         '404':
           description: Category not found
+        '422':
+          description: Input validation failed
+        '500':
+          description: Internal server error or unknown error
       security:
         - jwtToken: []
   /event:
@@ -120,6 +176,11 @@ paths:
         - Event
       description: get all events
       operationId: getEvents
+      parameters:
+        - $ref: '#/components/parameters/QueryLimit'
+        - $ref: '#/components/parameters/QuerySkip'
+        - $ref: '#/components/parameters/QueryMatch'
+        - $ref: '#/components/parameters/QuerySort'
       responses:
         '200':
           description: successful operation
@@ -127,8 +188,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EventResponse'
-        '400':
-          description: No events found
+        '404':
+          description: Event not found
+        '500':
+          description: Internal server error or unknown error
     post:
       tags:
         - Event
@@ -140,8 +203,16 @@ paths:
             schema:
               $ref: '#/components/schemas/EventModel'
       responses:
-        '405':
-          description: Invalid input
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
+        '422':
+          description: Input validation failed
+        '500':
+          description: Internal server error or unknown error
+      security:
+        - jwtToken: []
   /event/{eventId}:
     delete:
       tags:
@@ -151,8 +222,14 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PathEventId'
       responses:
+        '201':
+          description: Event successfully deleted
         '400':
           description: Invalid ID supplied
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
         '404':
           description: Event not found
       security:
@@ -171,10 +248,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EventModel'
-        '400':
-          description: Invalid ID supplied
         '404':
           description: Event not found
+        '500':
+          description: Internal server error or unknown error
       security:
         - jwtToken: []
   /location:
@@ -183,6 +260,11 @@ paths:
         - Location
       description: get all Locations
       operationId: getLocations
+      parameters:
+        - $ref: '#/components/parameters/QueryLimit'
+        - $ref: '#/components/parameters/QuerySkip'
+        - $ref: '#/components/parameters/QueryMatch'
+        - $ref: '#/components/parameters/QuerySort'
       responses:
         '200':
           description: successful operation
@@ -190,8 +272,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LocationResponse'
-        '400':
-          description: No locations found
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
+        '404':
+          description: Location not found
+        '500':
+          description: Internal server error or unknown error
       security:
         - jwtToken: []
     post:
@@ -205,8 +293,14 @@ paths:
             schema:
               $ref: '#/components/schemas/LocationModel'
       responses:
-        '405':
-          description: Invalid input
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
+        '422':
+          description: Input validation failed
+        '500':
+          description: Internal server error or unknown error
       security:
         - jwtToken: []
   /location/{id}:
@@ -224,10 +318,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LocationModel'
-        '400':
-          description: Invalid ID supplied
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
         '404':
           description: Location not found
+        '500':
+          description: Internal server error or unknown error
       security:
         - jwtToken: []
     patch:
@@ -251,10 +349,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LocationModel'
-        '400':
-          description: Invalid Location supplied
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
         '404':
           description: Location not found
+        '422':
+          description: Input validation failed
+        '500':
+          description: Internal server error or unknown error
+      security:
+        - jwtToken: []
+  /register/user:
+    post:
+      tags:
+        - register
+      summary: Register/Sign up a user
+      operationId: registerUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizeUserPost'
+      responses:
+        '200':
+          description: User successfully registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizeUserModel'
+        '401':
+          description: User not authenticated
+        '422':
+          description: Input validation failed
+      x-passRequest: true
       security:
         - jwtToken: []
   /ticket:
@@ -263,6 +393,11 @@ paths:
         - Ticket
       description: get all Tickets
       operationId: getTickets
+      parameters:
+        - $ref: '#/components/parameters/QueryLimit'
+        - $ref: '#/components/parameters/QuerySkip'
+        - $ref: '#/components/parameters/QueryMatch'
+        - $ref: '#/components/parameters/QuerySort'
       responses:
         '200':
           description: successful operation
@@ -270,8 +405,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TicketResponse'
-        '400':
-          description: No Tickets found
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
+        '404':
+          description: Ticket not found
+        '500':
+          description: Internal server error or unknown error
       security:
         - jwtToken: []
     post:
@@ -285,8 +426,20 @@ paths:
             schema:
               $ref: '#/components/schemas/TicketModel'
       responses:
-        '405':
-          description: Invalid input
+        '200':
+          description: Ticket successfully added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketModel'
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
+        '422':
+          description: Input validation failed
+        '500':
+          description: Internal server error or unknown error
       security:
         - jwtToken: []
   /ticket/{id}:
@@ -304,13 +457,70 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TicketResponse'
-        '400':
-          description: Invalid ID supplied
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
         '404':
           description: Ticket not found
+        '500':
+          description: Internal server error or unknown error
       security:
         - jwtToken: []
   /user:
+    get:
+      tags:
+        - user
+      summary: Get all  user
+      description: get all users from the server.
+      operationId: getUsers
+      parameters:
+        - $ref: '#/components/parameters/QueryLimit'
+        - $ref: '#/components/parameters/QuerySkip'
+        - $ref: '#/components/parameters/QueryMatch'
+        - $ref: '#/components/parameters/QuerySort'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error or unknown error
+      security:
+        - jwtToken: []
+    post:
+      tags:
+        - user
+      summary: Create user
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserModel'
+      responses:
+        '200':
+          description: User successfully created
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
+        '422':
+          description: Input validation failed
+        '500':
+          description: Internal server error or unknown error
+      security:
+        - jwtToken: []
+  /user/{id}:
     delete:
       tags:
         - User
@@ -320,18 +530,25 @@ paths:
       parameters:
         - $ref: '#/components/parameters/PathUserId'
       responses:
-        '400':
-          description: Invalid username supplied
+        '201':
+          description: User successfully deleted
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
         '404':
           description: User not found
+        '500':
+          description: Internal server error or unknown error
       security:
         - jwtToken: []
     get:
       tags:
-        - user
-      summary: Get all  user
-      description: get all users from the server.
-      operationId: getUsers
+        - User
+      description: Get user by id
+      operationId: getUserById
+      parameters:
+        - $ref: '#/components/parameters/PathUserId'
       responses:
         '200':
           description: successful operation
@@ -339,8 +556,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserModel'
-        '400':
-          description: No users found
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error or unknown error
       security:
         - jwtToken: []
     patch:
@@ -364,83 +587,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserModel'
-        '400':
-          description: Invalid user supplied
+        '401':
+          description: User not authenticated
+        '403':
+          description: User not authorized
         '404':
           description: User not found
-      security:
-        - jwtToken: []
-    post:
-      tags:
-        - user
-      summary: Create user
-      description: This can only be done by the logged in user.
-      operationId: createUser
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserModel'
-      responses:
-        '405':
-          description: Invalid input
-      security:
-        - jwtToken: []
-  /user/login:
-    get:
-      tags:
-        - login
-      summary: login/sign in user
-      description: get the api token
-      operationId: login
-      parameters:
-        - $ref: '#/components/parameters/QueryUsername'
-        - in: query
-          name: password
-          required: true
-          schema:
-            type: string
-            format: uuid
-            example: stack@123
-      responses:
-        '200':
-          description: successful operation
-        '400':
-          description: Invalid username/password supplied
-      security:
-        - jwtToken: []
-  /user/logout:
-    get:
-      tags:
-        - user
-      summary: Logs out current logged in user session
-      description: delete the api token
-      operationId: logoutUser
-      parameters: []
-      responses:
-        default:
-          description: successful operation
-      security:
-        - jwtToken: []
-  /user/{id}:
-    get:
-      tags:
-        - User
-      description: Get user by id
-      operationId: getUserById
-      parameters:
-        - $ref: '#/components/parameters/PathUserId'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserModel'
-        '400':
-          description: Invalid username supplied
-        '404':
-          description: User not found
+        '422':
+          description: Input validation failed
+        '500':
+          description: Internal server error or unknown error
       security:
         - jwtToken: []
 components:
@@ -484,6 +640,24 @@ components:
         type: string
         format: uuid
         example: 6e210bfd-4673-493d-aa23-68305a718710
+    QueryLimit:
+      name: limit
+      in: query
+      description: Limit the number of items returned
+      required: false
+      schema:
+        type: integer
+      example: 10
+    QueryMatch:
+      name: match
+      in: query
+      description: >-
+        Run a match query in the fields of the items, only specific fields are
+        allowed Date values should be in the ISO format, i.e. `2017-01-01` or
+        `2017-01-01T22:00:00`
+      required: false
+      schema:
+        type: string
     QueryPassword:
       in: query
       name: password
@@ -492,6 +666,23 @@ components:
         type: string
         format: uuid
         example: stack@123
+    QuerySkip:
+      name: skip
+      in: query
+      description: The number of items to skip
+      required: false
+      schema:
+        type: integer
+      example: 20
+    QuerySort:
+      name: sort
+      in: query
+      description: >-
+        Sort the items on the specified field and order. i.e. name=1 to sort
+        items in ascending order based on their name.
+      required: false
+      schema:
+        type: string
     QueryUsername:
       in: query
       name: username
@@ -501,6 +692,42 @@ components:
         format: email
         example: hherobiam@gmail.com
   schemas:
+    AuthorizeModel:
+      type: object
+      properties:
+        token:
+          type: string
+          readOnly: true
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5Y3BCVzRKSU0zYWVE...
+        user:
+          $ref: '#/components/schemas/UserModel'
+      required:
+        - user
+        - token
+    AuthorizeToken:
+      type: string
+      readOnly: true
+      example: >-
+        eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5Y3BCVzRKSU0zYWVEdmJhRGZ3YlBGYVFuM1gyIiwicGVybWlzc2lvbnMiOnt9LCJpc3MiOiJzZXJ2ZXItY2l0eSIsImF1ZCI6InNlcnZlci1jaXR5Iiwicm9sZSI6NCwidXNlcl90eXBlIjoyLCJhbm9ueW1vdXMiOmZhbHNlLCJzdGFsZXMiOjE1NzQ4MDg2MzI1NjEsImlhdCI6MTU3NDgwNzczMn0._TySfCQj-Y9nwn9Ia3xGbTDFNmxl79wSE7G2n9wRnhw
+    AuthorizeUserModel:
+      type: object
+      properties:
+        token:
+          type: string
+          readOnly: true
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5Y3BCVzRKSU0zYWVE...
+        user:
+          $ref: '#/components/schemas/UserModel'
+      required:
+        - user
+        - token
+    AuthorizeUserPost:
+      type: object
+      required:
+        - user
+      properties:
+        user:
+          $ref: '#/components/schemas/UserPost'
     EventCategory:
       type: object
       properties:
@@ -630,6 +857,31 @@ components:
         name: Seattle Coffee
         email: host@gmail.com
         phone_no: '123456789'
+    JwtAccess:
+      type: object
+      required:
+        - sub
+      properties:
+        sub:
+          type: string
+        picture:
+          type: string
+        iss:
+          type: string
+        aud:
+          type: string
+        authTime:
+          type: string
+        userId:
+          type: string
+        iat:
+          type: number
+        exp:
+          type: number
+        email:
+          type: string
+        phoneNumber:
+          type: string
     LocationModel:
       type: object
       properties:
@@ -720,46 +972,110 @@ components:
             $ref: '#/components/schemas/TicketModel'
         meta:
           $ref: '#/components/schemas/Meta'
+    UserGender:
+      type: string
+      enum:
+        - male
+        - female
+        - other
+      example: male
     UserModel:
       type: object
       properties:
         _id:
           type: string
-          format: uuid
+          readOnly: true
         first_name:
           type: string
           description: Users firstname
         last_name:
           type: string
           description: Users lastname
+        mobile:
+          type: string
+          description: Users mobile number
+        gender:
+          $ref: '#/components/schemas/UserGender'
+          description: Users gender
         email:
           type: string
           format: email
           description: Users email
         date_of_birth:
           type: string
-          format: date
           description: Users date of birth
-        password:
+        profilePic:
           type: string
-          format: password
-        auth_token:
+          description: Users profile picture url
+        firebaseToken:
           type: string
-        favorites:
-          $ref: '#/components/schemas/EventModel'
+          nullable: true
+          example: ej.433355d332rq3gdasfdsfgsggasgsdgga34t2t63653525
       example:
-        _id: 6e210bfd-4673-493d-aa23-68305a718710
         first_name: Kathryn
         last_name: Bennett
-        date_of_birth: '1962-01-01'
+        mobile: 264816639110
+        gender: male
         email: example@gmail.com
-        password: password
-        created_at: '2020-01-01T00:00:00.000Z'
-        updated_at: '2020-01-01T00:00:00.000Z'
-        auth_token: >-
-          adsjfdsoahdsfoiuahrnlvihbsaouybvclkhsabdcuyvcgqsoflurbgourygrwbekuiybvfkjhbkueyg
-        favorites:
-          - _id: 5e210bfd-4673-493d-aa23-68305a718710
+        date_of_birth: '1962-01-01'
+      required:
+        - id
+        - first_name
+        - last_name
+        - email
+        - mobile
+        - gender
+        - date_of_birth
+    UserPost:
+      type: object
+      properties:
+        first_name:
+          type: string
+          description: Users firstname
+        last_name:
+          type: string
+          description: Users lastname
+        mobile:
+          type: string
+          description: Users mobile number
+        gender:
+          $ref: '#/components/schemas/UserGender'
+          description: Users gender
+        email:
+          type: string
+          format: email
+          description: Users email
+        date_of_birth:
+          type: string
+          description: Users date of birth
+        profilePic:
+          type: string
+          description: Users profile picture url
+      example:
+        first_name: Kathryn
+        last_name: Bennett
+        mobile: 264816639110
+        gender: male
+        email: example@gmail.com
+        date_of_birth: '1962-01-01'
+      required:
+        - first_name
+        - last_name
+        - email
+        - mobile
+        - gender
+        - date_of_birth
+    UserResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserModel'
+        meta:
+          $ref: '#/components/schemas/Meta'
   securitySchemes:
     jwtToken:
       type: http

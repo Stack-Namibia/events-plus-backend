@@ -3,12 +3,17 @@ import { mockItGenerator } from 'generate-it-mockers';
 import { JwtAccess } from '@/http/nodegen/interfaces/JwtAccess';
 
 import { AddTicketPost } from '@/http/nodegen/interfaces/AddTicketPost';
+import { TicketGetQuery } from '@/http/nodegen/interfaces/TicketGetQuery';
 import { TicketIdGetPath } from '@/http/nodegen/interfaces/TicketIdGetPath';
+import { TicketModel } from '@/http/nodegen/interfaces/TicketModel';
 import { TicketResponse } from '@/http/nodegen/interfaces/TicketResponse';
 
 class TicketDomainMock {
   // Operation ID: getTickets
-  async getTickets(jwtData: JwtAccess): Promise<TicketResponse> {
+  async getTickets(
+    jwtData: JwtAccess,
+    query: TicketGetQuery
+  ): Promise<TicketResponse> {
     return mockItGenerator({
       type: 'object',
       required: ['data'],
@@ -47,8 +52,25 @@ class TicketDomainMock {
   }
 
   // Operation ID: addTicket
-  async addTicket(body: AddTicketPost, jwtData: JwtAccess): Promise<any> {
-    return mockItGenerator({});
+  async addTicket(
+    body: AddTicketPost,
+    jwtData: JwtAccess
+  ): Promise<TicketModel> {
+    return mockItGenerator({
+      type: 'object',
+      properties: {
+        _id: { type: 'string', format: 'uuid' },
+        type: { type: 'string', enum: ['VIP', 'VVIP', 'General'] },
+        price: { type: 'number' },
+        quantity: { type: 'integer' },
+      },
+      example: {
+        _id: '5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f',
+        type: 'General Admission',
+        price: 150,
+        quantity: 100,
+      },
+    });
   }
 
   // Operation ID: getTicketById

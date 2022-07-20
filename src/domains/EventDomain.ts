@@ -1,4 +1,4 @@
-import { AddEventPost, EventEventIdDeletePath, EventEventIdGetPath } from '@/http/nodegen/interfaces';
+import { AddEventPost, EventEventIdDeletePath, EventEventIdGetPath, EventGetQuery } from '@/http/nodegen/interfaces';
 
 import { EventDomainInterface } from '@/http/nodegen/domainInterfaces/EventDomainInterface';
 import { JwtAccess } from '@/http/nodegen/interfaces';
@@ -15,7 +15,7 @@ class EventDomain implements EventDomainInterface {
    * Summary: undefined
    * Description: get all events
    **/
-  public async getEvents(): Promise<EventResponse> {
+  public async getEvents(query: EventGetQuery): Promise<EventResponse> {
     const events = await EventModel.find({});
     const total = await EventModel.countDocuments({});
     return {
@@ -32,7 +32,7 @@ class EventDomain implements EventDomainInterface {
    * Summary: undefined
    * Description: add new event
    **/
-  public async addEvent(body: AddEventPost): Promise<any> {
+  public async addEvent(body: AddEventPost, jwtData: JwtAccess): Promise<any> {
     const event = new EventModel({ ...(body as any) });
     await event.save();
     return 'Event created succesfully!';

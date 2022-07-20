@@ -1,8 +1,4 @@
-import {
-  AddTicketPost,
-  TicketIdGetPath,
-  TicketResponse,
-} from '@/http/nodegen/interfaces';
+import { AddTicketPost, TicketGetQuery, TicketIdGetPath, TicketResponse } from '@/http/nodegen/interfaces';
 
 import { TicketDomainInterface } from '@/http/nodegen/domainInterfaces/TicketDomainInterface';
 import { JwtAccess } from '@/http/nodegen/interfaces';
@@ -16,8 +12,8 @@ class TicketDomain implements TicketDomainInterface {
    * Summary: undefined
    * Description: get all Tickets
    **/
-  public async getTickets(jwtData: JwtAccess): Promise<TicketResponse> {
-    return TicketDomainMock.getTickets(jwtData);
+  public async getTickets(jwtData: JwtAccess, query: TicketGetQuery): Promise<TicketResponse> {
+    return TicketDomainMock.getTickets(jwtData, query);
   }
 
   /**
@@ -26,10 +22,7 @@ class TicketDomain implements TicketDomainInterface {
    * Summary: undefined
    * Description: add new Ticket
    **/
-  public async addTicket(
-    body: AddTicketPost,
-    jwtData: JwtAccess
-  ): Promise<any> {
+  public async addTicket(body: AddTicketPost, jwtData: JwtAccess): Promise<any> {
     return TicketDomainMock.addTicket(body, jwtData);
   }
 
@@ -39,10 +32,7 @@ class TicketDomain implements TicketDomainInterface {
    * Summary: undefined
    * Description: Returns a single Ticket by id
    **/
-  public async getTicketById(
-    jwtData: JwtAccess,
-    params: TicketIdGetPath
-  ): Promise<TicketResponse> {
+  public async getTicketById(jwtData: JwtAccess, params: TicketIdGetPath): Promise<TicketResponse> {
     return TicketDomainMock.getTicketById(jwtData, params);
   }
 }

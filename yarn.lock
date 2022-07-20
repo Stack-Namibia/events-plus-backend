@@ -2451,7 +2451,7 @@ etag@~1.8.1:
 
 "events-plus-swagger@git+https://github.com/Stack-Namibia/events-plus-swagger.git":
   version "1.0.0"
-  resolved "git+https://github.com/Stack-Namibia/events-plus-swagger.git#3371c9ec69d787d58e515f4eff9ae682673a2aba"
+  resolved "git+https://github.com/Stack-Namibia/events-plus-swagger.git#a85f39cd5d8d6fe032022f795f9a4ec9bbb9b80d"
   dependencies:
     boats "^2.35.0"
 

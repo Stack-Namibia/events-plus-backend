@@ -1,39 +1,45 @@
 export default {
+  // getUsers
+  getUsers: {
+    data: [
+      {
+        _id: String,
+        first_name: String,
+        last_name: String,
+        mobile: String,
+        gender: String,
+        email: String,
+        date_of_birth: String,
+        profilePic: String,
+        firebaseToken: String,
+      },
+    ],
+    meta: {
+      total: Number,
+      lastUpdate: String,
+      skip: Number,
+      limit: Number,
+      orderedBy: String,
+    },
+  },
+
+  // createUser
+  createUser: {},
+
   // deleteUser
   deleteUser: {},
 
-  // getUsers
-  getUsers: {
+  // getUserById
+  getUserById: {
     _id: String,
     first_name: String,
     last_name: String,
+    mobile: String,
+    gender: String,
     email: String,
     date_of_birth: String,
-    password: String,
-    auth_token: String,
-    favorites: {
-      _id: String,
-      name: String,
-      description: String,
-      host: [{ _id: String, name: String, email: String, phoneNumber: String }],
-      category: [{ _id: String, name: String }],
-      eventDate: String,
-      endTime: String,
-      location: {
-        _id: String,
-        name: String,
-        address: String,
-        city: String,
-        state: String,
-        zip: String,
-        country: String,
-        longitude: String,
-        latitude: String,
-      },
-      attendance: Number,
-      tickets: [{ _id: String, type: String, price: Number, quantity: Number }],
-      images: [String],
-    },
+    profilePic: String,
+    firebaseToken: String,
   },
 
   // updateUser
@@ -41,75 +47,11 @@ export default {
     _id: String,
     first_name: String,
     last_name: String,
+    mobile: String,
+    gender: String,
     email: String,
     date_of_birth: String,
-    password: String,
-    auth_token: String,
-    favorites: {
-      _id: String,
-      name: String,
-      description: String,
-      host: [{ _id: String, name: String, email: String, phoneNumber: String }],
-      category: [{ _id: String, name: String }],
-      eventDate: String,
-      endTime: String,
-      location: {
-        _id: String,
-        name: String,
-        address: String,
-        city: String,
-        state: String,
-        zip: String,
-        country: String,
-        longitude: String,
-        latitude: String,
-      },
-      attendance: Number,
-      tickets: [{ _id: String, type: String, price: Number, quantity: Number }],
-      images: [String],
-    },
-  },
-
-  // createUser
-  createUser: {},
-
-  // login
-  login: {},
-
-  // logoutUser
-  logoutUser: {},
-
-  // getUserById
-  getUserById: {
-    _id: String,
-    first_name: String,
-    last_name: String,
-    email: String,
-    date_of_birth: String,
-    password: String,
-    auth_token: String,
-    favorites: {
-      _id: String,
-      name: String,
-      description: String,
-      host: [{ _id: String, name: String, email: String, phoneNumber: String }],
-      category: [{ _id: String, name: String }],
-      eventDate: String,
-      endTime: String,
-      location: {
-        _id: String,
-        name: String,
-        address: String,
-        city: String,
-        state: String,
-        zip: String,
-        country: String,
-        longitude: String,
-        latitude: String,
-      },
-      attendance: Number,
-      tickets: [{ _id: String, type: String, price: Number, quantity: Number }],
-      images: [String],
-    },
+    profilePic: String,
+    firebaseToken: String,
   },
 };

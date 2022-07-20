@@ -1,5 +1,6 @@
 import {
   AddCategoryPost,
+  CategoryGetQuery,
   CategoryIdDeletePath,
   CategoryIdGetPath,
   CategoryIdPatchPath,
@@ -19,8 +20,8 @@ class CategoryDomain implements CategoryDomainInterface {
    * Summary: undefined
    * Description: get all Categories
    **/
-  public async getCategories(jwtData: JwtAccess): Promise<EventCategoryResponse> {
-    return CategoryDomainMock.getCategories(jwtData);
+  public async getCategories(jwtData: JwtAccess, query: CategoryGetQuery): Promise<EventCategoryResponse> {
+    return CategoryDomainMock.getCategories(jwtData, query);
   }
 
   /**

@@ -3,6 +3,7 @@ import { mockItGenerator } from 'generate-it-mockers';
 import { JwtAccess } from '@/http/nodegen/interfaces/JwtAccess';
 
 import { AddLocationPost } from '@/http/nodegen/interfaces/AddLocationPost';
+import { LocationGetQuery } from '@/http/nodegen/interfaces/LocationGetQuery';
 import { LocationIdGetPath } from '@/http/nodegen/interfaces/LocationIdGetPath';
 import { LocationIdPatchPath } from '@/http/nodegen/interfaces/LocationIdPatchPath';
 import { LocationModel } from '@/http/nodegen/interfaces/LocationModel';
@@ -11,7 +12,10 @@ import { UpdateLocationPatch } from '@/http/nodegen/interfaces/UpdateLocationPat
 
 class LocationDomainMock {
   // Operation ID: getLocations
-  async getLocations(jwtData: JwtAccess): Promise<LocationResponse> {
+  async getLocations(
+    jwtData: JwtAccess,
+    query: LocationGetQuery
+  ): Promise<LocationResponse> {
     return mockItGenerator({
       type: 'object',
       required: ['data'],

@@ -1,5 +1,6 @@
 import {
   AddLocationPost,
+  LocationGetQuery,
   LocationIdGetPath,
   LocationIdPatchPath,
   LocationModel,
@@ -19,8 +20,8 @@ class LocationDomain implements LocationDomainInterface {
    * Summary: undefined
    * Description: get all Locations
    **/
-  public async getLocations(jwtData: JwtAccess): Promise<LocationResponse> {
-    return LocationDomainMock.getLocations(jwtData);
+  public async getLocations(jwtData: JwtAccess, query: LocationGetQuery): Promise<LocationResponse> {
+    return LocationDomainMock.getLocations(jwtData, query);
   }
 
   /**
@@ -29,10 +30,7 @@ class LocationDomain implements LocationDomainInterface {
    * Summary: undefined
    * Description: add new Location
    **/
-  public async addLocation(
-    body: AddLocationPost,
-    jwtData: JwtAccess
-  ): Promise<any> {
+  public async addLocation(body: AddLocationPost, jwtData: JwtAccess): Promise<any> {
     return LocationDomainMock.addLocation(body, jwtData);
   }
 
@@ -42,10 +40,7 @@ class LocationDomain implements LocationDomainInterface {
    * Summary: undefined
    * Description: Returns a single Location by id
    **/
-  public async getLocationById(
-    jwtData: JwtAccess,
-    params: LocationIdGetPath
-  ): Promise<LocationModel> {
+  public async getLocationById(jwtData: JwtAccess, params: LocationIdGetPath): Promise<LocationModel> {
     return LocationDomainMock.getLocationById(jwtData, params);
   }
 

@@ -13,32 +13,6 @@ export default function () {
   const router = Router();
 
   /**
-   * Operation ID: deleteUser
-   * Summary: Delete user
-   * Description: This can only be done by the logged in user.
-   */
-
-  router.delete(
-    '/',
-    accessTokenMiddleware([
-      'Authorization',
-    ]) /* Validate request security tokens */,
-
-    celebrate(
-      userValidators.deleteUser
-    ) /* Validate the request data and return validation errors, options passed in via x-joi-options */,
-
-    async (req: any, res: GenerateItExpressResponse) => {
-      res.inferResponseType(
-        await UserDomain.deleteUser(req.jwtData, req.params),
-        200,
-        undefined,
-        userTransformOutputs.deleteUser
-      );
-    }
-  );
-
-  /**
    * Operation ID: getUsers
    * Summary: Get all  user
    * Description: get all users from the server.
@@ -50,38 +24,16 @@ export default function () {
       'Authorization',
     ]) /* Validate request security tokens */,
 
-    async (req: any, res: GenerateItExpressResponse) => {
-      res.inferResponseType(
-        await UserDomain.getUsers(req.jwtData),
-        200,
-        undefined,
-        userTransformOutputs.getUsers
-      );
-    }
-  );
-
-  /**
-   * Operation ID: updateUser
-   * Summary: Updated user
-   * Description: This can only be done by the logged in user.
-   */
-
-  router.patch(
-    '/',
-    accessTokenMiddleware([
-      'Authorization',
-    ]) /* Validate request security tokens */,
-
     celebrate(
-      userValidators.updateUser
+      userValidators.getUsers
     ) /* Validate the request data and return validation errors, options passed in via x-joi-options */,
 
     async (req: any, res: GenerateItExpressResponse) => {
       res.inferResponseType(
-        await UserDomain.updateUser(req.body, req.jwtData, req.params),
+        await UserDomain.getUsers(req.jwtData, req.query),
         200,
         undefined,
-        userTransformOutputs.updateUser
+        userTransformOutputs.getUsers
       );
     }
   );
@@ -113,49 +65,27 @@ export default function () {
   );
 
   /**
-   * Operation ID: login
-   * Summary: login/sign in user
-   * Description: get the api token
+   * Operation ID: deleteUser
+   * Summary: Delete user
+   * Description: This can only be done by the logged in user.
    */
 
-  router.get(
-    '/login',
+  router.delete(
+    '/:id',
     accessTokenMiddleware([
       'Authorization',
     ]) /* Validate request security tokens */,
 
     celebrate(
-      userValidators.login
+      userValidators.deleteUser
     ) /* Validate the request data and return validation errors, options passed in via x-joi-options */,
 
     async (req: any, res: GenerateItExpressResponse) => {
       res.inferResponseType(
-        await UserDomain.login(req.jwtData, req.query),
-        200,
+        await UserDomain.deleteUser(req.jwtData, req.params),
+        201,
         undefined,
-        userTransformOutputs.login
-      );
-    }
-  );
-
-  /**
-   * Operation ID: logoutUser
-   * Summary: Logs out current logged in user session
-   * Description: delete the api token
-   */
-
-  router.get(
-    '/logout',
-    accessTokenMiddleware([
-      'Authorization',
-    ]) /* Validate request security tokens */,
-
-    async (req: any, res: GenerateItExpressResponse) => {
-      res.inferResponseType(
-        await UserDomain.logoutUser(req.jwtData),
-        200,
-        undefined,
-        userTransformOutputs.logoutUser
+        userTransformOutputs.deleteUser
       );
     }
   );
@@ -182,6 +112,32 @@ export default function () {
         200,
         undefined,
         userTransformOutputs.getUserById
+      );
+    }
+  );
+
+  /**
+   * Operation ID: updateUser
+   * Summary: Updated user
+   * Description: This can only be done by the logged in user.
+   */
+
+  router.patch(
+    '/:id',
+    accessTokenMiddleware([
+      'Authorization',
+    ]) /* Validate request security tokens */,
+
+    celebrate(
+      userValidators.updateUser
+    ) /* Validate the request data and return validation errors, options passed in via x-joi-options */,
+
+    async (req: any, res: GenerateItExpressResponse) => {
+      res.inferResponseType(
+        await UserDomain.updateUser(req.body, req.jwtData, req.params),
+        200,
+        undefined,
+        userTransformOutputs.updateUser
       );
     }
   );

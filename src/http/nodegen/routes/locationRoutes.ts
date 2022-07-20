@@ -24,9 +24,13 @@ export default function () {
       'Authorization',
     ]) /* Validate request security tokens */,
 
+    celebrate(
+      locationValidators.getLocations
+    ) /* Validate the request data and return validation errors, options passed in via x-joi-options */,
+
     async (req: any, res: GenerateItExpressResponse) => {
       res.inferResponseType(
-        await LocationDomain.getLocations(req.jwtData),
+        await LocationDomain.getLocations(req.jwtData, req.query),
         200,
         undefined,
         locationTransformOutputs.getLocations

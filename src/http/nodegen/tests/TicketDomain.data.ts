@@ -1,5 +1,13 @@
 import * as Joi from 'joi';
 
+export const getTicketsQueryLimit = 77;
+
+export const getTicketsQuerySkip = 7;
+
+export const getTicketsQueryMatch = 'aOn7butMUmzdpFilljD5kJPXSQLuPSxWRHaCNn63shfjmooKOz4oOugYzCsNlLFZ1vpEfH';
+
+export const getTicketsQuerySort = 'mDQ01OFCa2kiPQkdz5AgllH5WiHBns9giHB8cy3wtazzK3mNr';
+
 export const addTicketBodyAddTicketPost = {
   _id: '5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f',
   type: 'General Admission',
@@ -44,8 +52,26 @@ export const validationSchemas: Record<string, Joi.AnySchema> = {
       orderedBy: Joi.string().allow('').allow(null),
     }).allow(null),
   }).allow(null),
-  ticketGet400: Joi.object({}),
-  ticketPost405: Joi.object({}),
+  ticketGet401: Joi.object({}),
+  ticketGet403: Joi.object({}),
+  ticketGet404: Joi.object({}),
+  ticketGet500: Joi.object({}),
+  ticketPost200: Joi.object({
+    _id: Joi.string().allow('').allow(null),
+    type: Joi.string().allow('').valid('VIP', 'VVIP', 'General').allow(null),
+    price: Joi.number().allow(null),
+    quantity: Joi.number().integer().allow(null),
+  }).allow(null),
+  ticketPostSuccess: Joi.object({
+    _id: Joi.string().allow('').allow(null),
+    type: Joi.string().allow('').valid('VIP', 'VVIP', 'General').allow(null),
+    price: Joi.number().allow(null),
+    quantity: Joi.number().integer().allow(null),
+  }).allow(null),
+  ticketPost401: Joi.object({}),
+  ticketPost403: Joi.object({}),
+  ticketPost422: Joi.object({}),
+  ticketPost500: Joi.object({}),
   ticketIdGet200: Joi.object({
     data: Joi.array().items(
       Joi.object({
@@ -80,8 +106,10 @@ export const validationSchemas: Record<string, Joi.AnySchema> = {
       orderedBy: Joi.string().allow('').allow(null),
     }).allow(null),
   }).allow(null),
-  ticketIdGet400: Joi.object({}),
+  ticketIdGet401: Joi.object({}),
+  ticketIdGet403: Joi.object({}),
   ticketIdGet404: Joi.object({}),
+  ticketIdGet500: Joi.object({}),
 };
 
 /**

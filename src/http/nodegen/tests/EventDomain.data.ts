@@ -1,5 +1,14 @@
 import * as Joi from 'joi';
 
+export const getEventsQueryLimit = 59;
+
+export const getEventsQuerySkip = 9;
+
+export const getEventsQueryMatch = 'CG3WMJB6EUUvHgJCy2BG8nS1TARU8Wl1Mvnx1NQBWGGP317sQCysGHDK1i04N6lyOSTESF6mFgcAvStc';
+
+export const getEventsQuerySort =
+  'BWUITfHxe7rBJNPPUNnNNZYI7ZQUr8dEAIPp3ncYDvNqlrEYhR5q0fastENK6ykOpbn4VhGcxkyWXLsPGk8Rwo1vli2Q6m';
+
 export const addEventBodyAddEventPost = {
   _id: '6e210bfd-4673-493d-aa23-68305a718710',
   name: 'Coffee concert',
@@ -144,9 +153,17 @@ export const validationSchemas: Record<string, Joi.AnySchema> = {
       orderedBy: Joi.string().allow('').allow(null),
     }).allow(null),
   }).allow(null),
-  eventGet400: Joi.object({}),
-  eventPost405: Joi.object({}),
+  eventGet404: Joi.object({}),
+  eventGet500: Joi.object({}),
+  eventPost401: Joi.object({}),
+  eventPost403: Joi.object({}),
+  eventPost422: Joi.object({}),
+  eventPost500: Joi.object({}),
+  eventEventIdDelete201: Joi.object({}),
+  eventEventIdDeleteSuccess: Joi.object({}),
   eventEventIdDelete400: Joi.object({}),
+  eventEventIdDelete401: Joi.object({}),
+  eventEventIdDelete403: Joi.object({}),
   eventEventIdDelete404: Joi.object({}),
   eventEventIdGet200: Joi.object({
     _id: Joi.string().allow('').allow(null),
@@ -226,8 +243,8 @@ export const validationSchemas: Record<string, Joi.AnySchema> = {
     ),
     images: Joi.array().items(Joi.string().allow('').allow(null)),
   }).allow(null),
-  eventEventIdGet400: Joi.object({}),
   eventEventIdGet404: Joi.object({}),
+  eventEventIdGet500: Joi.object({}),
 };
 
 /**

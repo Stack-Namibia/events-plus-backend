@@ -21,9 +21,13 @@ export default function () {
   router.get(
     '/',
 
+    celebrate(
+      eventValidators.getEvents
+    ) /* Validate the request data and return validation errors, options passed in via x-joi-options */,
+
     async (req: any, res: GenerateItExpressResponse) => {
       res.inferResponseType(
-        await EventDomain.getEvents(),
+        await EventDomain.getEvents(req.query),
         200,
         undefined,
         eventTransformOutputs.getEvents
@@ -39,6 +43,9 @@ export default function () {
 
   router.post(
     '/',
+    accessTokenMiddleware([
+      'Authorization',
+    ]) /* Validate request security tokens */,
 
     celebrate(
       eventValidators.addEvent
@@ -46,7 +53,7 @@ export default function () {
 
     async (req: any, res: GenerateItExpressResponse) => {
       res.inferResponseType(
-        await EventDomain.addEvent(req.body),
+        await EventDomain.addEvent(req.body, req.jwtData),
         200,
         undefined,
         eventTransformOutputs.addEvent
@@ -73,7 +80,7 @@ export default function () {
     async (req: any, res: GenerateItExpressResponse) => {
       res.inferResponseType(
         await EventDomain.deleteEventById(req.jwtData, req.params),
-        200,
+        201,
         undefined,
         eventTransformOutputs.deleteEventById
       );

@@ -1,5 +1,6 @@
 import {
   AddLocationPost,
+  LocationGetQuery,
   LocationIdGetPath,
   LocationIdPatchPath,
   LocationModel,
@@ -15,7 +16,10 @@ export interface LocationDomainInterface {
    * Description: get all Locations
    * Security header(s): ['Authorization']
    **/
-  getLocations(jwtData: JwtAccess): Promise<LocationResponse>;
+  getLocations(
+    jwtData: JwtAccess,
+    query: LocationGetQuery
+  ): Promise<LocationResponse>;
 
   /**
    * Operation ID: addLocation

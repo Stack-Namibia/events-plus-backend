@@ -5,12 +5,13 @@ import { JwtAccess } from '@/http/nodegen/interfaces/JwtAccess';
 import { AddEventPost } from '@/http/nodegen/interfaces/AddEventPost';
 import { EventEventIdDeletePath } from '@/http/nodegen/interfaces/EventEventIdDeletePath';
 import { EventEventIdGetPath } from '@/http/nodegen/interfaces/EventEventIdGetPath';
+import { EventGetQuery } from '@/http/nodegen/interfaces/EventGetQuery';
 import { EventModel } from '@/http/nodegen/interfaces/EventModel';
 import { EventResponse } from '@/http/nodegen/interfaces/EventResponse';
 
 class EventDomainMock {
   // Operation ID: getEvents
-  async getEvents(): Promise<EventResponse> {
+  async getEvents(query: EventGetQuery): Promise<EventResponse> {
     return mockItGenerator({
       type: 'object',
       required: ['data'],
@@ -183,7 +184,7 @@ class EventDomainMock {
   }
 
   // Operation ID: addEvent
-  async addEvent(body: AddEventPost): Promise<any> {
+  async addEvent(body: AddEventPost, jwtData: JwtAccess): Promise<any> {
     return mockItGenerator({});
   }
 

@@ -12,7 +12,7 @@ export default {
   },
 
   // addTicket
-  addTicket: {},
+  addTicket: { _id: String, type: String, price: Number, quantity: Number },
 
   // getTicketById
   getTicketById: {

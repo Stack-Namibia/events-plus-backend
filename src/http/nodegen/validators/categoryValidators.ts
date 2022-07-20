@@ -1,7 +1,14 @@
 import { Joi } from 'celebrate';
 
 export default {
-  getCategories: {},
+  getCategories: {
+    query: Joi.object({
+      limit: Joi.number().integer(),
+      skip: Joi.number().integer(),
+      match: Joi.string().allow(''),
+      sort: Joi.string().allow(''),
+    }),
+  },
 
   addCategory: {
     body: Joi.object({

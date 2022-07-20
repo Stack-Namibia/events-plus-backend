@@ -1,5 +1,6 @@
 import {
   AddCategoryPost,
+  CategoryGetQuery,
   CategoryIdDeletePath,
   CategoryIdGetPath,
   CategoryIdPatchPath,
@@ -15,7 +16,10 @@ export interface CategoryDomainInterface {
    * Description: get all Categories
    * Security header(s): ['Authorization']
    **/
-  getCategories(jwtData: JwtAccess): Promise<EventCategoryResponse>;
+  getCategories(
+    jwtData: JwtAccess,
+    query: CategoryGetQuery
+  ): Promise<EventCategoryResponse>;
 
   /**
    * Operation ID: addCategory

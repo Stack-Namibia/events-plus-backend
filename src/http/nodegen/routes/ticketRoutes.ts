@@ -24,9 +24,13 @@ export default function () {
       'Authorization',
     ]) /* Validate request security tokens */,
 
+    celebrate(
+      ticketValidators.getTickets
+    ) /* Validate the request data and return validation errors, options passed in via x-joi-options */,
+
     async (req: any, res: GenerateItExpressResponse) => {
       res.inferResponseType(
-        await TicketDomain.getTickets(req.jwtData),
+        await TicketDomain.getTickets(req.jwtData, req.query),
         200,
         undefined,
         ticketTransformOutputs.getTickets

@@ -1,6 +1,8 @@
 import {
   AddTicketPost,
+  TicketGetQuery,
   TicketIdGetPath,
+  TicketModel,
   TicketResponse,
 } from '@/http/nodegen/interfaces';
 import { JwtAccess } from '@/http/nodegen/interfaces';
@@ -12,7 +14,10 @@ export interface TicketDomainInterface {
    * Description: get all Tickets
    * Security header(s): ['Authorization']
    **/
-  getTickets(jwtData: JwtAccess): Promise<TicketResponse>;
+  getTickets(
+    jwtData: JwtAccess,
+    query: TicketGetQuery
+  ): Promise<TicketResponse>;
 
   /**
    * Operation ID: addTicket
@@ -20,7 +25,7 @@ export interface TicketDomainInterface {
    * Description: add new Ticket
    * Security header(s): ['Authorization']
    **/
-  addTicket(body: AddTicketPost, jwtData: JwtAccess): Promise<any>;
+  addTicket(body: AddTicketPost, jwtData: JwtAccess): Promise<TicketModel>;
 
   /**
    * Operation ID: getTicketById

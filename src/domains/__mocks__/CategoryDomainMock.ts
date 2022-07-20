@@ -3,6 +3,7 @@ import { mockItGenerator } from 'generate-it-mockers';
 import { JwtAccess } from '@/http/nodegen/interfaces/JwtAccess';
 
 import { AddCategoryPost } from '@/http/nodegen/interfaces/AddCategoryPost';
+import { CategoryGetQuery } from '@/http/nodegen/interfaces/CategoryGetQuery';
 import { CategoryIdDeletePath } from '@/http/nodegen/interfaces/CategoryIdDeletePath';
 import { CategoryIdGetPath } from '@/http/nodegen/interfaces/CategoryIdGetPath';
 import { CategoryIdPatchPath } from '@/http/nodegen/interfaces/CategoryIdPatchPath';
@@ -11,7 +12,10 @@ import { UpdateCategoryPatch } from '@/http/nodegen/interfaces/UpdateCategoryPat
 
 class CategoryDomainMock {
   // Operation ID: getCategories
-  async getCategories(jwtData: JwtAccess): Promise<EventCategoryResponse> {
+  async getCategories(
+    jwtData: JwtAccess,
+    query: CategoryGetQuery
+  ): Promise<EventCategoryResponse> {
     return mockItGenerator({
       type: 'object',
       required: ['data'],
