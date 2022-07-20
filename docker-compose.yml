@@ -1,6 +1,26 @@
 version: "3"
 
 services:
+  db:
+    image: mongo
+    command: mongod --setParameter logLevel=0
+    ports:
+      - 27017:27017
+    volumes:
+      - dbdata:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=eventstest
+      - MONGO_INITDB_ROOT_PASSWORD=goodPassword
+      - MONGO_INITDB_DATABASE=eventsplustest
+
+  wait-for-db:
+    image: waisbrot/wait
+    restart: "no"
+    depends_on:
+      - db
+    environment:
+      - TARGETS=db:27017
+      - TIMEOUT=60
   event-plus-api:
     image: "${IMAGE_PREFIX}event-plus-api-image:${IMAGE_TAG:-latest}"
     build:
@@ -14,14 +34,13 @@ services:
       - ./tsconfig.json:/code/tsconfig.json
       - ./src:/code/src/
     ports:
-      - "8080:8000"
-    # networks:
-    #   - some-external-network
+      - "8000:8000"
+    depends_on:
+      - db
+    links:
+      - db
     working_dir: /code
     entrypoint: /bin/sh
     command: '-c "npx tsc-watch --preserveWatchOutput --compiler /code/node_modules/.bin/ttsc --onSuccess "/sbin/docker-entrypoint.sh prod""'
-
-# networks:
-#   some-external-network:
-#     external:
-#       name: some-external-network
+volumes:
+  dbdata:
