@@ -52,5 +52,10 @@ export const mockAuth = (middleware?: RequestHandler) => {
     );
 };
 
+export { TestAuthorizeDomain } from './AuthorizeDomain';
+export { TestCategoryDomain } from './CategoryDomain';
 export { TestEventDomain } from './EventDomain';
+export { TestLocationDomain } from './LocationDomain';
+export { TestRegisterDomain } from './RegisterDomain';
+export { TestTicketDomain } from './TicketDomain';
 export { TestUserDomain } from './UserDomain';

@@ -1,11 +1,9 @@
 import { baseUrl, defaultSetupTeardown, mockAuth, request } from '@/http/nodegen/tests';
 import {
   createUserBodyCreateUserPost,
-  loginQueryPassword,
-  loginQueryUsername,
-  pathUserName as userName,
+  pathId as id,
   responseValidator,
-  updateUserBodyUpdateUserPut,
+  updateUserBodyUpdateUserPatch,
 } from '@/http/nodegen/tests/UserDomain.data';
 
 defaultSetupTeardown();
@@ -49,7 +47,7 @@ describe('UserDomain', () => {
   it('can PUT /user', async () => {
     await request
       .put(`${baseUrl}/user`)
-      .send(updateUserBodyUpdateUserPut)
+      .send(updateUserBodyUpdateUserPatch)
       .set({ Authorization: 'Bearer base64string' })
       .expect(({ status, body }) => {
         expect(status).toBe(200);
@@ -59,31 +57,31 @@ describe('UserDomain', () => {
       });
   });
 
-  it('can GET /user/login', async () => {
-    await request
-      .get(`${baseUrl}/user/login`)
-      .set({ Authorization: 'Bearer base64string' })
-      .query({ username: loginQueryUsername, password: loginQueryPassword })
-      .expect(({ status, body }) => {
-        expect(status).toBe(200);
+  // it('can GET /user/login', async () => {
+  //   await request
+  //     .get(`${baseUrl}/user/login`)
+  //     .set({ Authorization: 'Bearer base64string' })
+  //     .query({ username: loginQueryUsername, password: loginQueryPassword })
+  //     .expect(({ status, body }) => {
+  //       expect(status).toBe(200);
 
-        const validated = responseValidator('userLoginGet200', body);
-        expect(validated.error).toBe(undefined);
-      });
-  });
+  //       const validated = responseValidator('userLoginGet200', body);
+  //       expect(validated.error).toBe(undefined);
+  //     });
+  // });
 
-  it('can GET /user/logout', async () => {
-    await request
-      .get(`${baseUrl}/user/logout`)
-      .set({ Authorization: 'Bearer base64string' })
-      .expect(({ status, body }) => {
-        expect(status).toBe(200);
-      });
-  });
+  // it('can GET /user/logout', async () => {
+  //   await request
+  //     .get(`${baseUrl}/user/logout`)
+  //     .set({ Authorization: 'Bearer base64string' })
+  //     .expect(({ status, body }) => {
+  //       expect(status).toBe(200);
+  //     });
+  // });
 
-  it('can GET /user/{userName}', async () => {
+  it('can GET /user/{id}', async () => {
     await request
-      .get(`${baseUrl}/user/${userName}`)
+      .get(`${baseUrl}/user/${id}`)
       .set({ Authorization: 'Bearer base64string' })
       .expect(({ status, body }) => {
         expect(status).toBe(200);

@@ -2,11 +2,11 @@ FROM node:16 as build
 
 WORKDIR /code
 
-COPY ./package.json ./package-lock.json /code/
-RUN npm ci
+COPY ./package.json ./yarn.lock /code/
+RUN yarn ci
 
 COPY . /code
-RUN npm run build
+RUN yarn run build
 
 # -----------------------------------------------------
 FROM node:16-alpine as runtime
@@ -15,7 +15,7 @@ WORKDIR /code
 
 COPY --from=build /code/package.json /code/package.json
 # FIXME: should only install prod deps for runtime
-# RUN npm i --production
+# RUN yarn i --production
 COPY --from=build /code/node_modules /code/node_modules
 COPY --from=build /code/build /code/build
 

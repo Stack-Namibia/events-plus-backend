@@ -1,10 +1,9 @@
 import {
   CreateUserPost,
-  UpdateUserPut,
-  User,
-  UserDeletePath,
-  UserLoginGetQuery,
-  UserUserNameGetPath,
+  UpdateUserPatch,
+  UserGetQuery,
+  UserIdDeletePath,
+  UserIdGetPath,
 } from '@/http/nodegen/interfaces';
 
 import { UserDomainInterface } from '@/http/nodegen/domainInterfaces/UserDomainInterface';
@@ -19,10 +18,7 @@ class UserDomain implements UserDomainInterface {
    * Summary: Delete user
    * Description: This can only be done by the logged in user.
    **/
-  public async deleteUser(
-    jwtData: JwtAccess,
-    params: UserDeletePath
-  ): Promise<any> {
+  public async deleteUser(jwtData: JwtAccess, params: UserIdDeletePath): Promise<any> {
     return UserDomainMock.deleteUser(jwtData, params);
   }
 
@@ -32,8 +28,8 @@ class UserDomain implements UserDomainInterface {
    * Summary: Get all  user
    * Description: get all users from the server.
    **/
-  public async getUsers(jwtData: JwtAccess): Promise<User> {
-    return UserDomainMock.getUsers(jwtData);
+  public async getUsers(jwtData: JwtAccess, query: UserGetQuery): Promise<any> {
+    return UserDomainMock.getUsers(jwtData, query);
   }
 
   /**
@@ -42,10 +38,7 @@ class UserDomain implements UserDomainInterface {
    * Summary: Create user
    * Description: This can only be done by the logged in user.
    **/
-  public async createUser(
-    body: CreateUserPost,
-    jwtData: JwtAccess
-  ): Promise<any> {
+  public async createUser(body: CreateUserPost, jwtData: JwtAccess): Promise<any> {
     return UserDomainMock.createUser(body, jwtData);
   }
 
@@ -55,11 +48,7 @@ class UserDomain implements UserDomainInterface {
    * Summary: Updated user
    * Description: This can only be done by the logged in user.
    **/
-  public async updateUser(
-    body: UpdateUserPut,
-    jwtData: JwtAccess,
-    params: any
-  ): Promise<User> {
+  public async updateUser(body: UpdateUserPatch, jwtData: JwtAccess, params: any): Promise<any> {
     return UserDomainMock.updateUser(body, jwtData, params);
   }
 
@@ -69,12 +58,9 @@ class UserDomain implements UserDomainInterface {
    * Summary: login/sign in user
    * Description: get the api token
    **/
-  public async login(
-    jwtData: JwtAccess,
-    query: UserLoginGetQuery
-  ): Promise<any> {
-    return UserDomainMock.login(jwtData, query);
-  }
+  // public async login(jwtData: JwtAccess, query: UserLoginGetQuery): Promise<any> {
+  //   return UserDomainMock.login(jwtData, query);
+  // }
 
   /**
    * Operation ID: logoutUser
@@ -82,9 +68,9 @@ class UserDomain implements UserDomainInterface {
    * Summary: Logs out current logged in user session
    * Description: delete the api token
    **/
-  public async logoutUser(jwtData: JwtAccess): Promise<any> {
-    return UserDomainMock.logoutUser(jwtData);
-  }
+  // public async logoutUser(jwtData: JwtAccess): Promise<any> {
+  //   return UserDomainMock.logoutUser(jwtData);
+  // }
 
   /**
    * Operation ID: getUserByName
@@ -92,11 +78,8 @@ class UserDomain implements UserDomainInterface {
    * Summary: undefined
    * Description: Get user by name
    **/
-  public async getUserByName(
-    jwtData: JwtAccess,
-    params: UserUserNameGetPath
-  ): Promise<User> {
-    return UserDomainMock.getUserByName(jwtData, params);
+  public async getUserById(jwtData: JwtAccess, params: UserIdGetPath): Promise<any> {
+    return UserDomainMock.getUserById(jwtData, params);
   }
 }
 

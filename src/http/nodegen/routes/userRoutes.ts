@@ -13,32 +13,6 @@ export default function () {
   const router = Router();
 
   /**
-   * Operation ID: deleteUser
-   * Summary: Delete user
-   * Description: This can only be done by the logged in user.
-   */
-
-  router.delete(
-    '/',
-    accessTokenMiddleware([
-      'Authorization',
-    ]) /* Validate request security tokens */,
-
-    celebrate(
-      userValidators.deleteUser
-    ) /* Validate the request data and return validation errors, options passed in via x-joi-options */,
-
-    async (req: any, res: GenerateItExpressResponse) => {
-      res.inferResponseType(
-        await UserDomain.deleteUser(req.jwtData, req.params),
-        200,
-        undefined,
-        userTransformOutputs.deleteUser
-      );
-    }
-  );
-
-  /**
    * Operation ID: getUsers
    * Summary: Get all  user
    * Description: get all users from the server.
@@ -50,9 +24,13 @@ export default function () {
       'Authorization',
     ]) /* Validate request security tokens */,
 
+    celebrate(
+      userValidators.getUsers
+    ) /* Validate the request data and return validation errors, options passed in via x-joi-options */,
+
     async (req: any, res: GenerateItExpressResponse) => {
       res.inferResponseType(
-        await UserDomain.getUsers(req.jwtData),
+        await UserDomain.getUsers(req.jwtData, req.query),
         200,
         undefined,
         userTransformOutputs.getUsers
@@ -87,13 +65,65 @@ export default function () {
   );
 
   /**
+   * Operation ID: deleteUser
+   * Summary: Delete user
+   * Description: This can only be done by the logged in user.
+   */
+
+  router.delete(
+    '/:id',
+    accessTokenMiddleware([
+      'Authorization',
+    ]) /* Validate request security tokens */,
+
+    celebrate(
+      userValidators.deleteUser
+    ) /* Validate the request data and return validation errors, options passed in via x-joi-options */,
+
+    async (req: any, res: GenerateItExpressResponse) => {
+      res.inferResponseType(
+        await UserDomain.deleteUser(req.jwtData, req.params),
+        201,
+        undefined,
+        userTransformOutputs.deleteUser
+      );
+    }
+  );
+
+  /**
+   * Operation ID: getUserById
+   *
+   * Description: Get user by id
+   */
+
+  router.get(
+    '/:id',
+    accessTokenMiddleware([
+      'Authorization',
+    ]) /* Validate request security tokens */,
+
+    celebrate(
+      userValidators.getUserById
+    ) /* Validate the request data and return validation errors, options passed in via x-joi-options */,
+
+    async (req: any, res: GenerateItExpressResponse) => {
+      res.inferResponseType(
+        await UserDomain.getUserById(req.jwtData, req.params),
+        200,
+        undefined,
+        userTransformOutputs.getUserById
+      );
+    }
+  );
+
+  /**
    * Operation ID: updateUser
    * Summary: Updated user
    * Description: This can only be done by the logged in user.
    */
 
-  router.put(
-    '/',
+  router.patch(
+    '/:id',
     accessTokenMiddleware([
       'Authorization',
     ]) /* Validate request security tokens */,
@@ -108,80 +138,6 @@ export default function () {
         200,
         undefined,
         userTransformOutputs.updateUser
-      );
-    }
-  );
-
-  /**
-   * Operation ID: login
-   * Summary: login/sign in user
-   * Description: get the api token
-   */
-
-  router.get(
-    '/login',
-    accessTokenMiddleware([
-      'Authorization',
-    ]) /* Validate request security tokens */,
-
-    celebrate(
-      userValidators.login
-    ) /* Validate the request data and return validation errors, options passed in via x-joi-options */,
-
-    async (req: any, res: GenerateItExpressResponse) => {
-      res.inferResponseType(
-        await UserDomain.login(req.jwtData, req.query),
-        200,
-        undefined,
-        userTransformOutputs.login
-      );
-    }
-  );
-
-  /**
-   * Operation ID: logoutUser
-   * Summary: Logs out current logged in user session
-   * Description: delete the api token
-   */
-
-  router.get(
-    '/logout',
-    accessTokenMiddleware([
-      'Authorization',
-    ]) /* Validate request security tokens */,
-
-    async (req: any, res: GenerateItExpressResponse) => {
-      res.inferResponseType(
-        await UserDomain.logoutUser(req.jwtData),
-        200,
-        undefined,
-        userTransformOutputs.logoutUser
-      );
-    }
-  );
-
-  /**
-   * Operation ID: getUserByName
-   *
-   * Description: Get user by name
-   */
-
-  router.get(
-    '/:userName',
-    accessTokenMiddleware([
-      'Authorization',
-    ]) /* Validate request security tokens */,
-
-    celebrate(
-      userValidators.getUserByName
-    ) /* Validate the request data and return validation errors, options passed in via x-joi-options */,
-
-    async (req: any, res: GenerateItExpressResponse) => {
-      res.inferResponseType(
-        await UserDomain.getUserByName(req.jwtData, req.params),
-        200,
-        undefined,
-        userTransformOutputs.getUserByName
       );
     }
   );

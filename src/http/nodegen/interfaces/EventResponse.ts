@@ -1,27 +1,9 @@
-export interface UpdateUserPut {
-  _id?: string;
-  auth_token?: string;
-  /**
-   * Users date of birth
-   */
-  date_of_birth?: Date;
-  /**
-   * Users email
-   */
-  email?: string;
-  favorites?: Favorites;
-  /**
-   * Users firstname
-   */
-  first_name?: string;
-  /**
-   * Users lastname
-   */
-  last_name?: string;
-  password?: string;
+export interface EventResponse {
+  data: Datum[];
+  meta?: Meta;
 }
 
-export interface Favorites {
+export interface Datum {
   _id?: string;
   attendance?: number;
   category?: Category[];
@@ -66,7 +48,7 @@ export interface Location {
 }
 
 export interface Ticket {
-  _id?: number;
+  _id?: string;
   price?: number;
   quantity?: number;
   type?: Type;
@@ -75,4 +57,13 @@ export interface Ticket {
 export enum Type {
   General = 'General',
   Vip = 'VIP',
+  Vvip = 'VVIP',
+}
+
+export interface Meta {
+  lastUpdate?: Date;
+  limit?: number;
+  orderedBy?: string;
+  skip?: number;
+  total?: number;
 }

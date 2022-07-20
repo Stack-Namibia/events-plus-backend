@@ -1,7 +1,33 @@
 {
   "versions": {
-    "2022-06-29T13:36:27.631Z": {
+    "2022-07-06T21:42:32.899Z": {
+      "/Users/hero/Documents/events-plus-backend/.openapi-nodegen/cache/compare/src/domains/CategoryDomain.ts": {
+        "diff": ""
+      },
       "/Users/hero/Documents/events-plus-backend/.openapi-nodegen/cache/compare/src/domains/EventDomain.ts": {
+        "diff": ""
+      },
+      "/Users/hero/Documents/events-plus-backend/.openapi-nodegen/cache/compare/src/domains/LocationDomain.ts": {
+        "diff": ""
+      },
+      "/Users/hero/Documents/events-plus-backend/.openapi-nodegen/cache/compare/src/domains/TicketDomain.ts": {
+        "diff": ""
+      },
+      "/Users/hero/Documents/events-plus-backend/.openapi-nodegen/cache/compare/src/domains/UserDomain.ts": {
+        "diff": ""
+      }
+    },
+    "2022-07-20T17:21:54.636Z": {
+      "/Users/hero/Documents/events-plus-backend/.openapi-nodegen/cache/compare/src/domains/CategoryDomain.ts": {
+        "diff": ""
+      },
+      "/Users/hero/Documents/events-plus-backend/.openapi-nodegen/cache/compare/src/domains/EventDomain.ts": {
+        "diff": ""
+      },
+      "/Users/hero/Documents/events-plus-backend/.openapi-nodegen/cache/compare/src/domains/LocationDomain.ts": {
+        "diff": ""
+      },
+      "/Users/hero/Documents/events-plus-backend/.openapi-nodegen/cache/compare/src/domains/TicketDomain.ts": {
         "diff": ""
       },
       "/Users/hero/Documents/events-plus-backend/.openapi-nodegen/cache/compare/src/domains/UserDomain.ts": {

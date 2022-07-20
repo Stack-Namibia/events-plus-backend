@@ -1,8 +1,10 @@
 import {
   AddEventPost,
-  Event,
   EventEventIdDeletePath,
   EventEventIdGetPath,
+  EventGetQuery,
+  EventModel,
+  EventResponse,
 } from '@/http/nodegen/interfaces';
 import { JwtAccess } from '@/http/nodegen/interfaces';
 
@@ -13,15 +15,15 @@ export interface EventDomainInterface {
    * Description: get all events
    * No additional middleware used
    **/
-  getEvents(): Promise<Event>;
+  getEvents(query: EventGetQuery): Promise<EventResponse>;
 
   /**
    * Operation ID: addEvent
    * Summary: undefined
    * Description: add new event
-   * No additional middleware used
+   * Security header(s): ['Authorization']
    **/
-  addEvent(body: AddEventPost): Promise<any>;
+  addEvent(body: AddEventPost, jwtData: JwtAccess): Promise<any>;
 
   /**
    * Operation ID: deleteEventById
@@ -40,5 +42,8 @@ export interface EventDomainInterface {
    * Description: Returns a single event by id
    * Security header(s): ['Authorization']
    **/
-  getEventById(jwtData: JwtAccess, params: EventEventIdGetPath): Promise<Event>;
+  getEventById(
+    jwtData: JwtAccess,
+    params: EventEventIdGetPath
+  ): Promise<EventModel>;
 }
