@@ -5,6 +5,7 @@ import _ from 'lodash';
 import config from '../config';
 import { UnauthorizedException } from '@/http/nodegen/errors';
 import NodegenRequest from '@/http/interfaces/NodegenRequest';
+import firebaseService from '@/shared/service/firebase.service';
 
 interface JwtDetails {
   maxAge: number;
@@ -89,7 +90,13 @@ class AccessTokenService {
     }
     if (jwtToken) {
       // verify the JWT token
-      this.verifyJWT(jwtToken)
+      // this.verifyJWT(jwtToken)
+      Promise.resolve()
+        .then(() => {
+          return ['/authorize', '/register'].includes(req.originalUrl)
+            ? firebaseService.decode(jwtToken)
+            : this.verifyJWT(jwtToken);
+        })
         .then((decodedToken: any) => {
           req.jwtData = decodedToken;
           req.originalToken = jwtToken;
