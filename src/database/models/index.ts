@@ -10,3 +10,4 @@ import ai from 'mongoose-auto-increment';
 import mongoose from 'mongoose';
 ai.initialize(mongoose.connection);
 export * from './event.model';
+export * from './user.model';
