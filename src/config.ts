@@ -38,4 +38,16 @@ export default {
     silent: true, // disable thread / proc start logs
   },
   mongoUrl: ConfigHelper.required('MONGO_URL') as string,
+  fbCredentials: {
+    type: ConfigHelper.required('FB_TYPE') as string,
+    projectId: ConfigHelper.required('FB_PROJECT_ID') as string,
+    privateKeyId: ConfigHelper.required('FB_PRIVATE_KEY_ID') as string,
+    privateKey: ConfigHelper.required('FB_PRIVATE_KEY') as string,
+    clientEmail: ConfigHelper.required('FB_CLIENT_EMAIL') as string,
+    clientId: ConfigHelper.required('FB_CLIENT_ID') as string,
+    authUri: ConfigHelper.required('FB_AUTH_URI') as string,
+    tokenUri: ConfigHelper.required('FB_TOKEN_URI') as string,
+    authProviderX509CertUrl: ConfigHelper.required('FB_AUTH_PROVIDER_X509_CERT_URL') as string,
+    clientX509CertUrl: ConfigHelper.required('FB_CLIENT_X509_CERT_URL') as string,
+  },
 };

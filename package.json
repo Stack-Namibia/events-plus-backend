@@ -35,6 +35,7 @@
     "express-auth-middle": "^1.1.2",
     "express-form-data": "^2.0.17",
     "express-promise-router": "^4.1.1",
+    "firebase-admin": "^11.0.0",
     "generate-it": "^5.39.0",
     "generate-it-logger": "^1.2.7",
     "generate-it-mockers": "^1.1.2",
