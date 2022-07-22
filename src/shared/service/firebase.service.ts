@@ -13,6 +13,7 @@ export const initializeFirebaseApp = () => {
     firebaseAdmin.initializeApp({
       credential: firebaseAdmin.credential.cert(config.fbCredentials),
     });
+    console.log('firebase admin sdk initialized succesfully');
   } catch (error) {
     console.log('firebase initialize', error);
   }
