@@ -7,6 +7,5 @@ npm-debug.log
 .openapi-nodegen/git/
 coverage
 .idea
-src/domains/__mocks__/
 src/domains/__tests__/
 src/http/nodegen/tests/
