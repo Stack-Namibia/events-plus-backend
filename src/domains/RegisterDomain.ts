@@ -1,7 +1,4 @@
-import {
-  AuthorizeUserModel,
-  RegisterUserPost,
-} from '@/http/nodegen/interfaces';
+import { AuthorizeUserModel, RegisterUserPost } from '@/http/nodegen/interfaces';
 
 import { RegisterDomainInterface } from '@/http/nodegen/domainInterfaces/RegisterDomainInterface';
 import { JwtAccess } from '@/http/nodegen/interfaces';

@@ -1,24 +1,9 @@
-const ignore = [
-  '/.openapi-nodegen/',
-  '/node_modules/',
-  '/build/',
-  '/dist/',
-];
+const ignore = ['/.openapi-nodegen/', '/node_modules/', '/build/', '/dist/', '/src/domains/__tests__/'];
 
 module.exports = {
-  moduleFileExtensions: [
-    'js',
-    'jsx',
-    'json',
-    'ts',
-    'tsx',
-  ],
+  moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
   collectCoverage: true,
-  collectCoverageFrom: [
-    'src/domains/*.{js,ts}',
-    'src/services/*.{js,ts}',
-    'src/utils/*.{js,ts}',
-  ],
+  collectCoverageFrom: ['src/domains/*.{js,ts}', 'src/services/*.{js,ts}', 'src/utils/*.{js,ts}'],
   coverageDirectory: 'coverage',
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
@@ -37,8 +22,6 @@ module.exports = {
     '^@utils': '<rootDir>/src/utils',
     '^@/(.*)$': '<rootDir>/src/$1',
   },
-  setupFilesAfterEnv: [
-    './jest.setup.js',
-  ],
+  setupFilesAfterEnv: ['./jest.setup.js'],
   testURL: 'http://localhost/',
 };
