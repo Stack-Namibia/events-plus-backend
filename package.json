@@ -16,13 +16,13 @@
     "start": "yarn build && node ./build/server.js",
     "pm2:start:dev": "pm2 start pm2.dev.config.js",
     "pm2:start:prod": "pm2 start pm2.prod.config.js",
-    "test": "yarn build && yarn lint && yarn test:unit",
-    "test:unit": "ENVIRONMENT=test && jest --silent --runInBand",
+    "test": "yarn test:unit",
+    "test:unit": "ENVIRONMENT=test && jest --silent --runInBand --passWithNoTests",
     "test:unit:single": "jest --clearCache && ENVIRONMENT=test && jest --collect-coverage false --verbose --forceExit --detectOpenHandles",
     "generate": "generate-it node_modules/events-plus-swagger/build/full-latest.yml --yes -m -t https://github.com/acrontum/openapi-nodegen-typescript-server.git",
     "link:generate": "yarn link events-plus-swagger && yarn generate",
     "git:generate": "yarn add git+https://github.com/Stack-Namibia/events-plus-swagger.git && yarn generate",
-    "ci": "yarn add --frozen-lockfile"
+    "ci": "yarn install --frozen-lockfile"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
