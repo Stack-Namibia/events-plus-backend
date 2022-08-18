@@ -1,3 +1,5 @@
+import { LocationSchema } from "@/database/models/locations.model";
+
 export default {
   // getLocations
   getLocations: {
@@ -24,7 +26,17 @@ export default {
   },
 
   // addLocation
-  addLocation: {},
+  addLocation: {
+    _id: String,
+    name: String,
+    address: String,
+    city: String,
+    state: String,
+    zip: String,
+    country: String,
+    longitude: String,
+    latitude: String,
+  },
 
   // getLocationById
   getLocationById: {

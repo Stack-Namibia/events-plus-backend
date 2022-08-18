@@ -45,7 +45,7 @@ export default () => {
 
       // No "produces", or json in the openapi file
       if (/(application\/json|application\/vnd\.api\+json)(;.*)?/.test(responseContentType)) {
-        return res.status(status).json(objectReduceByMap(dataOrPath, outputMap, {"allowNullish":false,"keepKeys":false,"throwErrorOnAlien":false,"allowNullishKeys":false}));
+        return res.status(status).json(objectReduceByMap(dataOrPath, outputMap as object, {"allowNullish":false,"keepKeys":false,"throwErrorOnAlien":false,"allowNullishKeys":false}));
       }
 
       // All images use with sendFile

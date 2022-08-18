@@ -3,14 +3,15 @@ import {
   LocationGetQuery,
   LocationIdGetPath,
   LocationIdPatchPath,
+  LocationModel,
   LocationResponse,
   UpdateLocationPatch,
 } from '@/http/nodegen/interfaces';
 
 import { LocationDomainInterface } from '@/http/nodegen/domainInterfaces/LocationDomainInterface';
 import { JwtAccess } from '@/http/nodegen/interfaces';
-import { LocationModel, LocationSchemaType } from '@/database/models/locations.model';
-import { formatDocument } from '@/shared/utils/formatter/response';
+
+import LocationDomainMock from './__mocks__/LocationDomainMock';
 
 class LocationDomain implements LocationDomainInterface {
   /**
@@ -19,15 +20,11 @@ class LocationDomain implements LocationDomainInterface {
    * Summary: undefined
    * Description: get all Locations
    **/
-  public async getLocations(jwtData: JwtAccess, query: LocationGetQuery): Promise<LocationResponse> {
-    const locations = await LocationModel.find({ ...query });
-    const total = await LocationModel.countDocuments({});
-    return {
-      data: locations.map((location) => formatDocument(location)),
-      meta: {
-        total,
-      },
-    };
+  public async getLocations(
+    jwtData: JwtAccess,
+    query: LocationGetQuery
+  ): Promise<LocationResponse> {
+    return LocationDomainMock.getLocations(jwtData, query);
   }
 
   /**
@@ -36,10 +33,11 @@ class LocationDomain implements LocationDomainInterface {
    * Summary: undefined
    * Description: add new Location
    **/
-  public async addLocation(body: AddLocationPost, jwtData: JwtAccess): Promise<LocationSchemaType> {
-    const location = new LocationModel({ ...(body as any) });
-    await location.save();
-    return location;
+  public async addLocation(
+    body: AddLocationPost,
+    jwtData: JwtAccess
+  ): Promise<any> {
+    return LocationDomainMock.addLocation(body, jwtData);
   }
 
   /**
@@ -48,13 +46,11 @@ class LocationDomain implements LocationDomainInterface {
    * Summary: undefined
    * Description: Returns a single Location by id
    **/
-  public async getLocationById(jwtData: JwtAccess, params: LocationIdGetPath): Promise<LocationSchemaType> {
-    const location = await LocationModel.findById(params.id);
-
-    if (!location) {
-      return Promise.reject('Location not found');
-    }
-    return location;
+  public async getLocationById(
+    jwtData: JwtAccess,
+    params: LocationIdGetPath
+  ): Promise<LocationModel> {
+    return LocationDomainMock.getLocationById(jwtData, params);
   }
 
   /**
@@ -67,9 +63,8 @@ class LocationDomain implements LocationDomainInterface {
     body: UpdateLocationPatch,
     jwtData: JwtAccess,
     params: LocationIdPatchPath
-  ): Promise<LocationSchemaType> {
-    const location = await LocationModel.findByIdAndUpdate(params.id, { ...(body as any) }, { new: true });
-    return location;
+  ): Promise<LocationModel> {
+    return LocationDomainMock.updateLocation(body, jwtData, params);
   }
 }
 
