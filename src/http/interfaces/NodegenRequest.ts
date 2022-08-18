@@ -1,9 +1,15 @@
 import express from 'express';
 import { JwtAccess } from '@/http/nodegen/interfaces';
 
-
-export default interface NodegenRequest extends express.Request {
-  jwtData: JwtAccess;
-  originalToken: string;
-  clientIp: string;
+declare global {
+  namespace Express {
+    export interface Request {
+      jwtData: JwtAccess;
+      originalToken: string;
+      clientIp?: string;
+    }
+  }
 }
+
+type NodegenRequest = express.Request;
+export default NodegenRequest;

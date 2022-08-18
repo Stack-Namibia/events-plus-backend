@@ -23,7 +23,7 @@ export interface EventDomainInterface {
    * Description: add new event
    * Security header(s): ['Authorization']
    **/
-  addEvent(body: AddEventPost, jwtData: JwtAccess): Promise<any>;
+  addEvent(body: AddEventPost, jwtData: JwtAccess): Promise<EventModel>;
 
   /**
    * Operation ID: deleteEventById

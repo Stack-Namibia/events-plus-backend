@@ -80,7 +80,7 @@ export default function () {
     async (req: any, res: GenerateItExpressResponse) => {
       res.inferResponseType(
         await EventDomain.deleteEventById(req.jwtData, req.params),
-        201,
+        200,
         undefined,
         eventTransformOutputs.deleteEventById
       );
