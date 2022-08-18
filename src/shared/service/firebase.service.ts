@@ -8,7 +8,7 @@
 import firebaseAdmin from 'firebase-admin';
 import config from '@/config';
 
-export const initializeFirebaseApp = () => {
+export const initializeFirebaseApp = (): void => {
   try {
     firebaseAdmin.initializeApp({
       credential: firebaseAdmin.credential.cert(config.fbCredentials),
@@ -20,7 +20,7 @@ export const initializeFirebaseApp = () => {
 };
 
 export class FirebaseService {
-  decode(token: string) {
+  decode(token: string): Promise<any> {
     return firebaseAdmin.auth().verifyIdToken(token);
   }
 }

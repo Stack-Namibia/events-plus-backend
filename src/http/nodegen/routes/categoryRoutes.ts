@@ -83,7 +83,7 @@ export default function () {
     async (req: any, res: GenerateItExpressResponse) => {
       res.inferResponseType(
         await CategoryDomain.deleteCategoryById(req.jwtData, req.params),
-        201,
+        200,
         undefined,
         categoryTransformOutputs.deleteCategoryById
       );

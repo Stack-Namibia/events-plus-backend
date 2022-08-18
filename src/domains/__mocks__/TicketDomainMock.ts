@@ -30,7 +30,7 @@ class TicketDomainMock {
             },
             example: {
               _id: '5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f',
-              type: 'General Admission',
+              type: 'General',
               price: 150,
               quantity: 100,
             },
@@ -66,7 +66,7 @@ class TicketDomainMock {
       },
       example: {
         _id: '5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f',
-        type: 'General Admission',
+        type: 'General',
         price: 150,
         quantity: 100,
       },
@@ -94,7 +94,7 @@ class TicketDomainMock {
             },
             example: {
               _id: '5e9f8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f',
-              type: 'General Admission',
+              type: 'General',
               price: 150,
               quantity: 100,
             },
