@@ -2730,7 +2730,7 @@ event-target-shim@^5.0.0:
 
 "events-plus-swagger@git+https://github.com/Stack-Namibia/events-plus-swagger.git":
   version "1.0.0"
-  resolved "git+https://github.com/Stack-Namibia/events-plus-swagger.git#a85f39cd5d8d6fe032022f795f9a4ec9bbb9b80d"
+  resolved "git+https://github.com/Stack-Namibia/events-plus-swagger.git#96462a9e34a9ab8605b5e350ea92bc0751112103"
   dependencies:
     boats "^2.35.0"
 

@@ -1,8 +1,10 @@
 export interface RegisterUserPost {
+  token: string;
   user: User;
 }
 
 export interface User {
+  _id?: string;
   /**
    * Users date of birth
    */
@@ -11,6 +13,7 @@ export interface User {
    * Users email
    */
   email: string;
+  firebaseToken?: string;
   /**
    * Users firstname
    */
@@ -31,6 +34,7 @@ export interface User {
    * Users profile picture url
    */
   profilePic?: string;
+  id: any;
 }
 
 /**

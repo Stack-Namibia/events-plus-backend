@@ -7,7 +7,7 @@ export interface EventModel {
    */
   description?: string;
   endTime?: string;
-  eventDate?: Date;
+  eventDate?: string;
   host?: Host[];
   images?: string[];
   location?: Location;

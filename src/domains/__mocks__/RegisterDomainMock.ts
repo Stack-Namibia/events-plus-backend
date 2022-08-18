@@ -50,16 +50,20 @@ class RegisterDomainMock {
             firebaseToken: {
               type: 'string',
               nullable: true,
-              example: 'ej.433355d332rq3gdasfdsfgsggasgsdgga34t2t63653525',
+              example: 'ej.433355d332rq3gdasfdsfgsggasgsdgga34t2t63653525  ',
             },
           },
           example: {
+            _id: '6e210bfd4673493daa2368305a718710',
             first_name: 'Kathryn',
             last_name: 'Bennett',
-            mobile: 264816639110,
+            mobile: '264816639110',
             gender: 'male',
             email: 'example@gmail.com',
             date_of_birth: '1962-01-01',
+            profilePic:
+              'https://firebasestorage.googleapis.com/v0/b/project/o/20-5-2016.png',
+            firebaseToken: 'ej.433355d332rq3gdasfdsfgsggasgsdgga34t2t63653525',
           },
           required: [
             'id',
